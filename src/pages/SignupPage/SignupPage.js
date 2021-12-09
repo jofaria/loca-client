@@ -7,32 +7,32 @@ import authService from "../../services/auth.service";
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
+
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleUsername = (e) => setUsername(e.target.value);
+  const handlePhone = (e) => setPhone(e.target.value);
 
   const handleSignupSubmit = async (e) => {
     try {
       e.preventDefault();
       // Create an object representing the request body
-      const requestBody = { email, password, name };
+      const requestBody = { email, password, username, phone };
 
-      const authToken = localStorage.getItem('authToken');
-      await axios.post(
-        'http://localhost:5005/auth/signup',
-        requestBody,
-        { headers: { Authorization: `Bearer ${authToken}`} }
-      )
+      const authToken = localStorage.getItem("authToken");
+      await axios.post("http://localhost:5005/auth/signup", requestBody, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       // or with a service
       // await authService.signup(requestBody);
 
-      
       // If the request is successful navigate to login page
       navigate("/login");
     } catch (error) {
@@ -57,8 +57,21 @@ function SignupPage(props) {
           onChange={handlePassword}
         />
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleUsername}
+        />
+
+        <label>Phone:</label>
+        <input
+          type="number"
+          name="phone"
+          value={phone}
+          onChange={handlePhone}
+        />
 
         <button type="submit">Sign Up</button>
       </form>
