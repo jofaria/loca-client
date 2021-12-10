@@ -1,12 +1,15 @@
 // import axios from "axios";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
 // import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
 function RegisterStorePage(props) {
+  const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
   // ! const [storeOwner, setStoreOwner] = useState(null);
@@ -63,6 +66,7 @@ function RegisterStorePage(props) {
 
       const newStore = {
         storeName,
+        storeOwner: user._id,
         logo,
         coverImg,
         description,

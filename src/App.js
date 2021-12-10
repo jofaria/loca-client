@@ -29,23 +29,16 @@ function App() {
           }
         />
 
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/signup"
+          path="/register-store"
           element={
             <IsAnon>
-              <SignupPage />
+              <RegisterStorePage />
             </IsAnon>
           }
         />
-        <Route
-          path="/login"
-          element={
-            <IsAnon>
-              <LoginPage />
-            </IsAnon>
-          }
-        />
-        <Route path="/register-store" element={<RegisterStorePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

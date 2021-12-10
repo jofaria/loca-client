@@ -10,7 +10,7 @@ function IsAnon({ children }) {
   // If the authentication is still loading
   if (isLoading) return <p>Loading ...</p>;
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     // If the user is already logged in navigate to home page
     return <Navigate to="/" />;
   } else {
