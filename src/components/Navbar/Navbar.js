@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <nav className="Navbar">
-      <Link to="/">
+      <Link to="/register-store">
         <button>Home</button>
       </Link>
 
