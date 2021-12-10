@@ -1,9 +1,8 @@
-// import axios from "axios";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-// import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
@@ -76,7 +75,13 @@ function RegisterStorePage(props) {
 
       console.log(newStore);
 
-      const response = await axios.post(`${API_URL}/api/stores`, newStore);
+      const authToken = localStorage.getItem("authToken");
+
+      await axios.post(`http://localhost:5005/api/stores`, newStore, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+
+      console.log("newStore after axios post", newStore);
 
       setStoreName("");
       setLogo("");

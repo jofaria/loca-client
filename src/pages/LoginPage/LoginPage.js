@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
-import authService from "../../services/auth.service";
+// import authService from "../../services/auth.service";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -55,7 +55,12 @@ function LoginPage(props) {
         <input type="text" name="email" value={email} onChange={handleEmail} />
 
         <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePassword}
+        />
 
         <button type="submit">Login</button>
       </form>

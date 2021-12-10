@@ -9,13 +9,16 @@ function Navbar() {
 
   return (
     <nav className="Navbar">
-      <Link to="/register-store">
+      <Link to="/">
         <button>Home</button>
       </Link>
 
       {isLoggedIn && (
         <>
           <button onClick={logOutUser}>Logout</button>
+          <Link to="/register-store">
+            <button>Register Store</button>
+          </Link>
         </>
       )}
 
