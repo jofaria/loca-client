@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
   // Get the value from the context
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, owner, logOutUser } = useContext(AuthContext);
+  console.log(owner);
 
   return (
     <nav className="Navbar">
@@ -35,9 +35,9 @@ function Navbar() {
       )}
 
       <div className="profile-img-wrapper">
-        {user && (
+        {owner && (
           <Link to="/profile">
-            <img className="profile-img" src={user.image} alt="profile" />
+            <p>{owner.username}</p>
           </Link>
         )}
       </div>

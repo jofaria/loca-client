@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 function AuthProviderWrapper({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [owner, setOwner] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,10 +24,10 @@ function AuthProviderWrapper({ children }) {
         // const response = await authService.verify();
 
         // If the token is valid, update the state variables
-        const user = response.data; // coming from payload
+        const owner = response.data; // coming from payload
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUser(user);
+        setOwner(owner);
       } else {
         setIsLoading(false);
       }
@@ -35,7 +35,7 @@ function AuthProviderWrapper({ children }) {
       // If the token is not validated, or there's another error
       setIsLoggedIn(false);
       setIsLoading(false);
-      setUser(null);
+      setOwner(null);
     }
   };
 
@@ -49,7 +49,7 @@ function AuthProviderWrapper({ children }) {
 
     // Update state variables
     setIsLoggedIn(false);
-    setUser(null);
+    setOwner(null);
   };
 
   useEffect(() => {
@@ -58,7 +58,7 @@ function AuthProviderWrapper({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, isLoading, user, logInUser, logOutUser }}
+      value={{ isLoggedIn, isLoading, owner, logInUser, logOutUser }}
     >
       {children}
     </AuthContext.Provider>

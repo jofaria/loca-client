@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 function RegisterStorePage(props) {
-  const { user } = useContext(AuthContext);
+  const { owner } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
@@ -32,7 +32,13 @@ function RegisterStorePage(props) {
   // HANDLE FUNCTIONS
 
   const handleStoreName = (e) => setStoreName(e.target.value);
-  const handleLogo = (e) => setLogo(e.target.value);
+  const handleLogo = (e) => {
+    if (e.target.value === "") {
+      return setLogo("https://www.aquiaolado.pt/Content/img/default-logo.png");
+    }
+    return setLogo(e.target.value);
+  };
+
   const handleCoverImg = (e) => setCoverImg(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
@@ -65,7 +71,7 @@ function RegisterStorePage(props) {
 
       const newStore = {
         storeName,
-        storeOwner: user._id,
+        storeOwner: owner._id,
         logo,
         coverImg,
         description,
@@ -77,11 +83,13 @@ function RegisterStorePage(props) {
 
       const authToken = localStorage.getItem("authToken");
 
-      await axios.post(`http://localhost:5005/api/stores`, newStore, {
+      const response = await axios.post(`${API_URL}/api/stores`, newStore, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
+      const createdStore = response.data;
+      const storeId = createdStore._id;
 
-      console.log("newStore after axios post", newStore);
+      console.log("createdStore after axios post", createdStore);
 
       setStoreName("");
       setLogo("");
@@ -90,7 +98,7 @@ function RegisterStorePage(props) {
       setWebsite("");
       setInstagram("");
 
-      navigate("/");
+      navigate("/" + storeId);
     } catch (error) {
       console.log(error);
     }

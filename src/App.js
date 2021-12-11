@@ -11,6 +11,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import RegisterStorePage from "./pages/RegisterStorePage/RegisterStorePage";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
+import StoreDetailsPage from "./pages/StoreDetailsPage/StoreDetailsPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             </IsAnon>
           }
         />
+        <Route path="/:storeId" element={<StoreDetailsPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
