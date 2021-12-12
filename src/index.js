@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProviderWrapper } from "./context/auth.context";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 ReactDOM.render(
   <React.StrictMode>
