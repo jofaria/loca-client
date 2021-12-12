@@ -132,9 +132,13 @@ nav li {
   height: 400px;
 }
 
-.pin-button {
-  background: none;
-  width: 10px;
-  border: none;
-  cursor: pointer;
+.custom-pin {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
+.custom-pin img {
+  width: 100%;
+  height: 100%;
 }

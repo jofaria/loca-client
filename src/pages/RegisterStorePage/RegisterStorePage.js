@@ -15,7 +15,10 @@ function RegisterStorePage(props) {
   const [logo, setLogo] = useState("");
   const [coverImg, setCoverImg] = useState("");
   const [description, setDescription] = useState("");
-  // const [location, setLocation] = useState({});
+  //const [location, setLocation] = useState({});
+  const [address, setAddress] = useState("");
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
   // const [errorMessage, setErrorMessage] = useState(undefined);
@@ -39,10 +42,14 @@ function RegisterStorePage(props) {
     return setLogo(e.target.value);
   };
 
+  const handleAddress = (e) => setAddress(e.target.value);
+  const handleLatitude = (e) => setLatitude(e.target.value);
+  const handleLongitude = (e) => setLongitude(e.target.value);
   const handleCoverImg = (e) => setCoverImg(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
+
   // const handleLocation = (e) => setLocation(e.target.value);
 
   // const handleCategories = (e) => {
@@ -73,6 +80,10 @@ function RegisterStorePage(props) {
         storeName,
         storeOwner: owner._id,
         logo,
+        location: {
+          address: address,
+          coordinates: [latitude, longitude],
+        },
         coverImg,
         description,
         website,
@@ -93,6 +104,9 @@ function RegisterStorePage(props) {
 
       setStoreName("");
       setLogo("");
+      setAddress("");
+      setLatitude(0);
+      setLongitude(0);
       setCoverImg("");
       setDescription("");
       setWebsite("");
@@ -128,6 +142,28 @@ function RegisterStorePage(props) {
           value={location}
           onChange={handleLocation}
         /> */}
+
+        <label>Address:</label>
+        <input
+          type="text"
+          name="address"
+          value={address}
+          onChange={handleAddress}
+        />
+        <label>Latitude:</label>
+        <input
+          type="number"
+          name="latitude"
+          value={latitude}
+          onChange={handleLatitude}
+        />
+        <label>Longitude:</label>
+        <input
+          type="number"
+          name="longitude"
+          value={longitude}
+          onChange={handleLongitude}
+        />
         <label>Website:</label>
         <input
           type="text"
