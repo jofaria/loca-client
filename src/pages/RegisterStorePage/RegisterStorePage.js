@@ -11,16 +11,15 @@ function RegisterStorePage(props) {
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
-  // ! const [storeOwner, setStoreOwner] = useState(null);
   const [logo, setLogo] = useState("");
   const [coverImg, setCoverImg] = useState("");
   const [description, setDescription] = useState("");
-  //const [location, setLocation] = useState({});
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
+  //const [location, setLocation] = useState({});
   // const [errorMessage, setErrorMessage] = useState(undefined);
 
   // Category options
@@ -35,20 +34,32 @@ function RegisterStorePage(props) {
   // HANDLE FUNCTIONS
 
   const handleStoreName = (e) => setStoreName(e.target.value);
-  const handleLogo = (e) => {
-    if (e.target.value === "") {
-      return setLogo("https://www.aquiaolado.pt/Content/img/default-logo.png");
-    }
-    return setLogo(e.target.value);
-  };
-
+  const handleCoverImg = (e) => setCoverImg(); // .files
   const handleAddress = (e) => setAddress(e.target.value);
   const handleLatitude = (e) => setLatitude(e.target.value);
   const handleLongitude = (e) => setLongitude(e.target.value);
-  const handleCoverImg = (e) => setCoverImg(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
+
+  const handleLogo = (e) => {
+    const formData = new FormData();
+    formData.append("file", logo);
+    formData.append("upload_preset", "bgz409st");
+    const sendImage = async () => {
+      try {
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1/dx8vvavbh/image/upload",
+          formData
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    sendImage();
+    setLogo(e.target.files[0]);
+  };
 
   // const handleLocation = (e) => setLocation(e.target.value);
 
@@ -127,10 +138,10 @@ function RegisterStorePage(props) {
         <input type="text" value={storeName} onChange={handleStoreName} />
 
         <label>Logo:</label>
-        <input type="text" value={logo} onChange={handleLogo} />
+        <input type="file" value={logo} onChange={handleLogo} />
 
         <label>Cover Image:</label>
-        <input type="text" value={coverImg} onChange={handleCoverImg} />
+        <input type="file" value={coverImg} onChange={handleCoverImg} />
 
         <label>Description:</label>
         <input type="text" value={description} onChange={handleDescription} />

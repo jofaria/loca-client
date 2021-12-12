@@ -5,33 +5,6 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-// const stores = [
-//   {
-//     _id: 1,
-//     name: "CRU Creative",
-//     description: "First store with location for testing",
-//     // The `location` field must have the following structure:
-//     location: {
-//       type: {
-//         type: "Rua do Rosário 211, 4050-524 Porto",
-//       },
-//       coordinates: [41.15035248865254, -8.621038344369948],
-//     },
-//   },
-//   {
-//     _id: 2,
-//     name: "Mão esquerda",
-//     description: "First store with location for testing",
-//     // The `location` field must have the following structure:
-//     location: {
-//       type: {
-//         type: "Rua da Alegria nº5, 4000-041 Porto",
-//       },
-//       coordinates: [41.1467755449724, -8.603872037766731],
-//     },
-//   },
-// ];
-
 function MapComponent() {
   const defaultMap = {
     latitude: 41.1579,
