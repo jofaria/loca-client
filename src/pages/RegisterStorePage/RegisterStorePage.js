@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { Link } from "react-router-dom";
+import imageService from "../../services/image.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -11,7 +12,6 @@ function RegisterStorePage(props) {
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
-  const [logo, setLogo] = useState("");
   const [coverImg, setCoverImg] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
@@ -19,6 +19,7 @@ function RegisterStorePage(props) {
   const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
+  const [logoURL, setLogoURL] = useState("");
   //const [location, setLocation] = useState({});
   // const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -42,24 +43,38 @@ function RegisterStorePage(props) {
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
 
-  const handleLogo = (e) => {
-    const formData = new FormData();
-    formData.append("file", logo);
-    formData.append("upload_preset", "bgz409st");
-    const sendImage = async () => {
-      try {
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1/dx8vvavbh/image/upload",
-          formData
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    sendImage();
-    setLogo(e.target.files[0]);
+  const handleImageUpload = async (e) => {
+    try {
+      const uploadData = new FormData();
+
+      uploadData.append("logo", e.target.files[0]);
+
+      const response = await imageService.uploadImage(uploadData);
+      console.log("response :>> ", response);
+      setLogoURL(response.data.secure_url);
+    } catch (error) {}
   };
+
+  // ? OTHER handleLogo function
+
+  // const handleLogo = (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", logo);
+  //   formData.append("upload_preset", "bgz409st");
+  //   const sendImage = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         "https://api.cloudinary.com/v1/dx8vvavbh/image/upload",
+  //         formData
+  //       );
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   sendImage();
+  //   setLogo(e.target.files[0]);
+  // };
 
   // const handleLocation = (e) => setLocation(e.target.value);
 
@@ -90,7 +105,7 @@ function RegisterStorePage(props) {
       const newStore = {
         storeName,
         storeOwner: owner._id,
-        logo,
+        logoURL,
         location: {
           address: address,
           coordinates: [latitude, longitude],
@@ -114,7 +129,7 @@ function RegisterStorePage(props) {
       console.log("createdStore after axios post", createdStore);
 
       setStoreName("");
-      setLogo("");
+      setLogoURL("");
       setAddress("");
       setLatitude(0);
       setLongitude(0);
@@ -138,7 +153,7 @@ function RegisterStorePage(props) {
         <input type="text" value={storeName} onChange={handleStoreName} />
 
         <label>Logo:</label>
-        <input type="file" value={logo} onChange={handleLogo} />
+        <input type="file" onChange={handleImageUpload} />
 
         <label>Cover Image:</label>
         <input type="file" value={coverImg} onChange={handleCoverImg} />

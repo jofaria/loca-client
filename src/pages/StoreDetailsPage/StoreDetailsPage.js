@@ -20,7 +20,9 @@ function StoreDetailsPage(props) {
         console.log(foundStore);
         setStore(foundStore);
         setLoading(false);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();
@@ -47,6 +49,10 @@ function StoreDetailsPage(props) {
               <h2>This is where the products will go</h2>
             </>
           )}
+
+          {/* <Link>
+            <button>Edit this store</button>
+          </Link> */}
         </>
       )}
     </div>

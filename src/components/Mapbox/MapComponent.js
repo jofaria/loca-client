@@ -4,6 +4,7 @@ import { useEffect } from "react/cjs/react.development";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
+const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function MapComponent() {
   const defaultMap = {
@@ -39,7 +40,7 @@ function MapComponent() {
     <div>
       <ReactMapGL
         {...viewport}
-        mapboxApiAccessToken="pk.eyJ1Ijoiam9pcm9uIiwiYSI6ImNrd3hxa3QzNDBoN2Iyd2xhd2RucWtrMDIifQ.FYSiJr_ITdnOWap1Jv8upQ"
+        mapboxApiAccessToken={REACT_APP_MAPBOX}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onViewportChange={handleViewportChange}
       >
