@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
-import authService from "../../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -13,17 +12,18 @@ function RegisterStorePage(props) {
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
-  const [logoURL, setLogoURL] = useState("");
-  const [coverImgURL, setCoverImgURL] = useState("");
+  const [coverImg, setCoverImg] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
+  const [logoURL, setLogoURL] = useState("");
+  //const [location, setLocation] = useState({});
   // const [errorMessage, setErrorMessage] = useState(undefined);
 
-  // ? Category options
+  // Category options
   // const [categories, setCategories] = useState([]);
   // const [organicMaterials, setOrganicMaterials] = useState(false);
   // const [recycledMaterials, setRecycledMaterials] = useState(false);
@@ -32,9 +32,10 @@ function RegisterStorePage(props) {
   // const [ethicallyMade, setEthicallyMade] = useState(false);
   // const [vintageSecondHand, setVintageSecondHand] = useState(false);
 
-  // ? HANDLE FUNCTIONS
+  // HANDLE FUNCTIONS
 
   const handleStoreName = (e) => setStoreName(e.target.value);
+  const handleCoverImg = (e) => setCoverImg(); // .files
   const handleAddress = (e) => setAddress(e.target.value);
   const handleLatitude = (e) => setLatitude(e.target.value);
   const handleLongitude = (e) => setLongitude(e.target.value);
@@ -53,18 +54,29 @@ function RegisterStorePage(props) {
       setLogoURL(response.data.secure_url);
     } catch (error) {}
   };
-  // const handleCoverImgUpload = async (e) => {
-  //   try {
-  //     const uploadData = new FormData();
-
-  //     uploadData.append("coverImg", e.target.files[0]);
-
-  //     const response = await imageService.uploadImage(uploadData);
-  //     setCoverImgURL("this imaaaage");
-  //   } catch (error) {}
-  // };
 
   // ? OTHER handleLogo function
+
+  // const handleLogo = (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", logo);
+  //   formData.append("upload_preset", "bgz409st");
+  //   const sendImage = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         "https://api.cloudinary.com/v1/dx8vvavbh/image/upload",
+  //         formData
+  //       );
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   sendImage();
+  //   setLogo(e.target.files[0]);
+  // };
+
+  // const handleLocation = (e) => setLocation(e.target.value);
 
   // const handleCategories = (e) => {
   //   if (typeof e.target.value === "string") {
@@ -84,18 +96,7 @@ function RegisterStorePage(props) {
 
   // const handleCategory = (e) => setCategory(e.target.value);
 
-  // const data = [
-  //   { option: "Recycled materials", id: 1 },
-  //   { option: "Organic materials", id: 2 },
-  //   { option: "Made locally", id: 3 },
-  //   { option: "Made ethically", id: 4 },
-  //   { option: "Cruelty-free", id: 5 },
-  //   { option: "Second-hand", id: 6 },
-  // ];
-
-  // const [options] = useState(data);
-
-  // ? HANDLE SUBMIT
+  // HANDLE SUBMIT
 
   const handleStoreSubmit = async (e) => {
     try {
@@ -109,11 +110,13 @@ function RegisterStorePage(props) {
           address: address,
           coordinates: [latitude, longitude],
         },
-        coverImgURL,
+        coverImg,
         description,
         website,
         instagram,
       };
+
+      console.log(newStore);
 
       const authToken = localStorage.getItem("authToken");
 
@@ -123,12 +126,14 @@ function RegisterStorePage(props) {
       const createdStore = response.data;
       const storeId = createdStore._id;
 
+      console.log("createdStore after axios post", createdStore);
+
       setStoreName("");
       setLogoURL("");
       setAddress("");
       setLatitude(0);
       setLongitude(0);
-      setCoverImgURL("");
+      setCoverImg("");
       setDescription("");
       setWebsite("");
       setInstagram("");
@@ -150,8 +155,8 @@ function RegisterStorePage(props) {
         <label>Logo:</label>
         <input type="file" onChange={handleImageUpload} />
 
-        {/* <label>Cover Image:</label>
-        <input type="file" onChange={handleCoverImgUpload} /> */}
+        <label>Cover Image:</label>
+        <input type="file" value={coverImg} onChange={handleCoverImg} />
 
         <label>Description:</label>
         <input type="text" value={description} onChange={handleDescription} />

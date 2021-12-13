@@ -1,33 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Multiselect } from "multiselect-react-dropdown";
+import { AuthContext } from "../../context/auth.context";
+import ownerService from "../../services/owner.service";
 
 function ProfilePage() {
-  const data = [
-    { option: "Recycled materials", id: 1 },
-    { option: "Organic materials", id: 2 },
-    { option: "Made locally", id: 3 },
-    { option: "Made ethically", id: 4 },
-    { option: "Cruelty-free", id: 5 },
-    { option: "Second-hand", id: 6 },
-  ];
+  const { owner } = useContext(AuthContext);
+  const [currentOwner, setCurrentOwner] = useState(null);
+  console.log("this is my owner", owner);
+  console.log(owner._id);
 
-  const [options] = useState(data);
+  useEffect(() => {
+    const fetchOwner = async () => {
+      try {
+        const response = await ownerService.getOne(owner._id);
+        const foundOwner = response.data;
+        setCurrentOwner(foundOwner);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchOwner();
+  }, []);
 
   return (
     <div>
       <h1>Profile Page</h1>
-      {/* <select multiple value={"somt"}>
-        <option value="organic-materials">Organic Materials</option>
-      </select>
-        <option value="organic-materials">Organic Materials</option> */}
+      {currentOwner && (
+        <div>
+          <p>{currentOwner.username}</p>
 
-      {/* <option label="recycledMaterials" value="recycled-materials" />
-            <option label="madeLocally" value="made-locally" />
-            <option label="ethicallyMade" value="made-ethically" />
-            <option label="crueltyFree" value="cruelty-free" />
-            <option label="vintageSecondHand" value="second-hand" /> */}
+          {currentOwner.store.map((eachStore) => {
+            return <p>{eachStore.storeName}</p>;
+          })}
+        </div>
+      )}
 
-      {/* <Multiselect options={options} displayValue={option} /> */}
+      {/* {currentOwner.store && <p>{currentOwner.store.storeName}</p>} */}
     </div>
   );
 }

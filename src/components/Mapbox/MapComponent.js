@@ -26,7 +26,6 @@ function MapComponent() {
       const fetchData = async () => {
         const response = await axios.get(API_URL + "/api/stores");
         const storesData = response.data;
-
         setStores(storesData);
       };
 
