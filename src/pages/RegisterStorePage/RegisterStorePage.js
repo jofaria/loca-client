@@ -17,8 +17,8 @@ function RegisterStorePage(props) {
   const [coverImgURL, setCoverImgURL] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  // const [latitude, setLatitude] = useState(0);
+  // const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
   // const [errorMessage, setErrorMessage] = useState(undefined);
@@ -36,8 +36,8 @@ function RegisterStorePage(props) {
 
   const handleStoreName = (e) => setStoreName(e.target.value);
   const handleAddress = (e) => setAddress(e.target.value);
-  const handleLatitude = (e) => setLatitude(e.target.value);
-  const handleLongitude = (e) => setLongitude(e.target.value);
+  // const handleLatitude = (e) => setLatitude(e.target.value);
+  // const handleLongitude = (e) => setLongitude(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
@@ -98,23 +98,24 @@ function RegisterStorePage(props) {
   // ? HANDLE SUBMIT
 
   const handleStoreSubmit = async (e) => {
+    e.preventDefault();
+
+    if (address === "") {
+      alert("Please fill in all the fields");
+    }
+
+    const newStore = {
+      storeName,
+      storeOwner: owner._id,
+      logoURL,
+      address,
+      coverImgURL,
+      description,
+      website,
+      instagram,
+    };
+
     try {
-      e.preventDefault();
-
-      const newStore = {
-        storeName,
-        storeOwner: owner._id,
-        logoURL,
-        location: {
-          address: address,
-          coordinates: [latitude, longitude],
-        },
-        coverImgURL,
-        description,
-        website,
-        instagram,
-      };
-
       const authToken = localStorage.getItem("authToken");
 
       const response = await axios.post(`${API_URL}/api/stores`, newStore, {
@@ -126,8 +127,8 @@ function RegisterStorePage(props) {
       setStoreName("");
       setLogoURL("");
       setAddress("");
-      setLatitude(0);
-      setLongitude(0);
+      // setLatitude(0);
+      // setLongitude(0);
       setCoverImgURL("");
       setDescription("");
       setWebsite("");
@@ -171,7 +172,7 @@ function RegisterStorePage(props) {
           value={address}
           onChange={handleAddress}
         />
-        <label>Latitude:</label>
+        {/* <label>Latitude:</label>
         <input
           type="number"
           name="latitude"
@@ -184,7 +185,7 @@ function RegisterStorePage(props) {
           name="longitude"
           value={longitude}
           onChange={handleLongitude}
-        />
+        /> */}
         <label>Website:</label>
         <input
           type="text"
