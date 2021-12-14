@@ -1,6 +1,5 @@
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
