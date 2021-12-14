@@ -19,7 +19,7 @@ function ProfilePage() {
     };
 
     fetchOwner();
-  }, []);
+  }, [owner]);
 
   return (
     <div>

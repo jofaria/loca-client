@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_SERVER_URL;
 const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function MapComponent() {
