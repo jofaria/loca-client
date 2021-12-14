@@ -12,7 +12,6 @@ function EditStorePage(props) {
   // const [store, setStore] = useState(null);
 
   const { storeId } = useParams();
-  console.log(storeId);
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
@@ -41,7 +40,6 @@ function EditStorePage(props) {
       uploadData.append("logo", e.target.files[0]);
 
       const response = await imageService.uploadImage(uploadData);
-      console.log("response :>> ", response);
       setLogoURL(response.data.secure_url);
     } catch (error) {}
   };
@@ -68,7 +66,6 @@ function EditStorePage(props) {
     try {
       const response = await storeService.updateOne(storeId, updateStore);
 
-      console.log("after update store submit :>> ", response.data);
       // const authToken = localStorage.getItem("authToken");
 
       // const response = await axios.post(`${API_URL}/api/stores`, newStore, {

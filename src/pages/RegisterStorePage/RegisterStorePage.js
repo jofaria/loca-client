@@ -47,7 +47,6 @@ function RegisterStorePage(props) {
       uploadData.append("logo", e.target.files[0]);
 
       const response = await imageService.uploadImage(uploadData);
-      console.log("response :>> ", response);
       setLogoURL(response.data.secure_url);
     } catch (error) {}
   };

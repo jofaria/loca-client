@@ -20,7 +20,6 @@ class ImageService {
   }
 
   uploadImage = (file) => {
-    console.log("in hereeeeeee: client image.service.js folder");
     return this.api.post("/api/upload", file);
   };
 }

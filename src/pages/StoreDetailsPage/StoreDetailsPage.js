@@ -17,7 +17,6 @@ function StoreDetailsPage(props) {
       try {
         const response = await axios.get(`${API_URL}/api/stores/${storeId}`);
         const foundStore = response.data;
-        console.log(foundStore);
         setStore(foundStore);
         //setLoading(false);
       } catch (error) {
