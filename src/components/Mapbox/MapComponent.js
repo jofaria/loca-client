@@ -49,8 +49,8 @@ function MapComponent() {
               <Marker
                 key={store._id}
                 className="marker"
-                latitude={store.location.coordinates[0]}
-                longitude={store.location.coordinates[1]}
+                latitude={store.location.coordinates[1]}
+                longitude={store.location.coordinates[0]}
                 offsetTop={-30}
                 offsetLeft={-15}
               >

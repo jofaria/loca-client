@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+// import React, { useRef, useEffect, useState } from "react";
 import MapComponent from "../../components/Mapbox/MapComponent";
 import StoreComponent from "../../components/StoreComponent/StoreComponent";
-import AddressSearch from "../../components/Mapbox/AddressSearch";
+// import AddressSearch from "../../components/Mapbox/AddressSearch";
 
 function HomePage() {
   return (

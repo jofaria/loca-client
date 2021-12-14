@@ -8,9 +8,9 @@ const API_URL = "http://localhost:5005";
 
 function StoreDetailsPage(props) {
   const [store, setStore] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const { storeId } = useParams();
-  const { owner } = useContext(AuthContext);
+  // const { owner } = useContext(AuthContext);
 
   useState(() => {
     const fetchData = async () => {
@@ -19,7 +19,7 @@ function StoreDetailsPage(props) {
         const foundStore = response.data;
         console.log(foundStore);
         setStore(foundStore);
-        setLoading(false);
+        //setLoading(false);
       } catch (error) {
         console.log(error);
       }

@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Multiselect } from "multiselect-react-dropdown";
+// import { Multiselect } from "multiselect-react-dropdown";
 import { AuthContext } from "../../context/auth.context";
 import ownerService from "../../services/owner.service";
 
 function ProfilePage() {
   const { owner } = useContext(AuthContext);
   const [currentOwner, setCurrentOwner] = useState(null);
-  console.log("this is my owner", owner);
-  console.log(owner._id);
 
   useEffect(() => {
     const fetchOwner = async () => {

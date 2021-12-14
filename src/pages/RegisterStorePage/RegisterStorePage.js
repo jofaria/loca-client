@@ -2,9 +2,9 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
-import authService from "../../services/auth.service";
+// import authService from "../../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
