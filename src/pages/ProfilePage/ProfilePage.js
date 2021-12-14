@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-// import { Multiselect } from "multiselect-react-dropdown";
 import { AuthContext } from "../../context/auth.context";
 import ownerService from "../../services/owner.service";
+import { Link } from "react-router-dom";
 
 function ProfilePage() {
   const { owner } = useContext(AuthContext);
@@ -26,15 +26,20 @@ function ProfilePage() {
       <h1>Profile Page</h1>
       {currentOwner && (
         <div>
-          <p>{currentOwner.username}</p>
+          <h2>User: {currentOwner.username}</h2>
 
           {currentOwner.store.map((eachStore) => {
-            return <p>{eachStore.storeName}</p>;
+            return (
+              <div key={eachStore._id}>
+                <p>{eachStore.storeName}</p>
+                <Link to={"/edit/" + eachStore._id}>
+                  <button>Edit</button>
+                </Link>
+              </div>
+            );
           })}
         </div>
       )}
-
-      {/* {currentOwner.store && <p>{currentOwner.store.storeName}</p>} */}
     </div>
   );
 }

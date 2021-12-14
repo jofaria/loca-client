@@ -1,44 +1,35 @@
-import axios from "axios";
+// import axios from "axios";
 import { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
+import storeService from "../../services/store.services";
 
-const API_URL = "http://localhost:5005";
-
-function RegisterStorePage(props) {
+function EditStorePage(props) {
   const { owner } = useContext(AuthContext);
+  // const [store, setStore] = useState(null);
+
+  const { storeId } = useParams();
+  console.log(storeId);
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
-  const [coverImg, setCoverImg] = useState("");
+  const [logoURL, setLogoURL] = useState("");
+  const [coverImgURL, setCoverImgURL] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [logoURL, setLogoURL] = useState("");
-  //const [location, setLocation] = useState({});
-  // const [errorMessage, setErrorMessage] = useState(undefined);
 
-  // Category options
-  // const [categories, setCategories] = useState([]);
-  // const [organicMaterials, setOrganicMaterials] = useState(false);
-  // const [recycledMaterials, setRecycledMaterials] = useState(false);
-  // const [madeLocally, setMadeLocally] = useState(false);
-  // const [crueltyFree, setCrueltyFree] = useState(false);
-  // const [ethicallyMade, setEthicallyMade] = useState(false);
-  // const [vintageSecondHand, setVintageSecondHand] = useState(false);
-
-  // HANDLE FUNCTIONS
+  // ? HANDLE FUNCTIONS
 
   const handleStoreName = (e) => setStoreName(e.target.value);
-  const handleCoverImg = (e) => setCoverImg(); // .files
+  // const handleCoverImg = (e) => setCoverImg(); // .files
   const handleAddress = (e) => setAddress(e.target.value);
-  const handleLatitude = (e) => setLatitude(e.target.value);
-  const handleLongitude = (e) => setLongitude(e.target.value);
+  // const handleLatitude = (e) => setLatitude(e.target.value);
+  // const handleLongitude = (e) => setLongitude(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
@@ -55,85 +46,43 @@ function RegisterStorePage(props) {
     } catch (error) {}
   };
 
-  // ? OTHER handleLogo function
-
-  // const handleLogo = (e) => {
-  //   const formData = new FormData();
-  //   formData.append("file", logo);
-  //   formData.append("upload_preset", "bgz409st");
-  //   const sendImage = async () => {
-  //     try {
-  //       const response = await axios.post(
-  //         "https://api.cloudinary.com/v1/dx8vvavbh/image/upload",
-  //         formData
-  //       );
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   sendImage();
-  //   setLogo(e.target.files[0]);
-  // };
-
-  // const handleLocation = (e) => setLocation(e.target.value);
-
-  // const handleCategories = (e) => {
-  //   if (typeof e.target.value === "string") {
-  //     setCategories([e.target.value]);
-  //   } else {
-  //     setCategories(e.target.value);
-  //   }
-  //   return;
-  // };
-
-  // const handleOrganicMaterials = (e) => setOrganicMaterials(e.target.checked);
-  // const handleRecycledMaterials = (e) => setRecycledMaterials(e.target.checked);
-  // const handleMadeLocally = (e) => setMadeLocally(e.target.checked);
-  // const handleCrueltyFree = (e) => setCrueltyFree(e.target.checked);
-  // const handleEthicallyMade = (e) => setEthicallyMade(e.target.checked);
-  // const handleVintageSecondHand = (e) => setVintageSecondHand(e.target.checked);s
-
-  // const handleCategory = (e) => setCategory(e.target.value);
-
-  // HANDLE SUBMIT
+  // ? HANDLE SUBMIT
 
   const handleStoreSubmit = async (e) => {
+    e.preventDefault();
+
+    if (address === "") {
+      alert("Please fill in all the fields");
+    }
+    const updateStore = {
+      storeName,
+      storeOwner: owner._id,
+      logoURL,
+      address,
+      coverImgURL,
+      description,
+      website,
+      instagram,
+    };
+
     try {
-      e.preventDefault();
+      const response = await storeService.updateOne(storeId, updateStore);
 
-      const newStore = {
-        storeName,
-        storeOwner: owner._id,
-        logoURL,
-        location: {
-          address: address,
-          coordinates: [latitude, longitude],
-        },
-        coverImg,
-        description,
-        website,
-        instagram,
-      };
+      console.log("after update store submit :>> ", response.data);
+      // const authToken = localStorage.getItem("authToken");
 
-      console.log(newStore);
-
-      const authToken = localStorage.getItem("authToken");
-
-      const response = await axios.post(`${API_URL}/api/stores`, newStore, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
-      const createdStore = response.data;
-      const storeId = createdStore._id;
-
-      console.log("createdStore after axios post", createdStore);
+      // const response = await axios.post(`${API_URL}/api/stores`, newStore, {
+      //   headers: { Authorization: `Bearer ${authToken}` },
+      // });
+      const updatedStore = response.data;
+      //const storeId = updatedStore._id;
 
       setStoreName("");
       setLogoURL("");
       setAddress("");
-      setLatitude(0);
-      setLongitude(0);
-      setCoverImg("");
+      // setLatitude(0);
+      // setLongitude(0);
+      setCoverImgURL("");
       setDescription("");
       setWebsite("");
       setInstagram("");
@@ -144,9 +93,18 @@ function RegisterStorePage(props) {
     }
   };
 
+  const handleDeleteStore = async (e) => {
+    try {
+      await storeService.deleteOne(storeId);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="RegisterStorePage">
-      <h1>Register Store</h1>
+    <div className="EditStorePage">
+      <h1>Edit Store</h1>
 
       <form onSubmit={handleStoreSubmit}>
         <label>Store Name:</label>
@@ -154,9 +112,6 @@ function RegisterStorePage(props) {
 
         <label>Logo:</label>
         <input type="file" onChange={handleImageUpload} />
-
-        <label>Cover Image:</label>
-        <input type="file" value={coverImg} onChange={handleCoverImg} />
 
         <label>Description:</label>
         <input type="text" value={description} onChange={handleDescription} />
@@ -176,7 +131,7 @@ function RegisterStorePage(props) {
           value={address}
           onChange={handleAddress}
         />
-        <label>Latitude:</label>
+        {/* <label>Latitude:</label>
         <input
           type="number"
           name="latitude"
@@ -189,7 +144,7 @@ function RegisterStorePage(props) {
           name="longitude"
           value={longitude}
           onChange={handleLongitude}
-        />
+        /> */}
         <label>Website:</label>
         <input
           type="text"
@@ -204,129 +159,12 @@ function RegisterStorePage(props) {
           value={instagram}
           onChange={handleInstagram}
         />
-        <button type="submit">Register Store</button>
+        <button type="submit">Edit Store</button>
       </form>
+
+      <button onClick={handleDeleteStore}> Delete Store </button>
     </div>
   );
 }
 
-export default RegisterStorePage;
-
-// <div>
-//   <p>Choose a category:</p>
-
-//   <label for="organicMaterials">Choose categories</label>
-//   <select multiple value={categories} onChange={handleCategories}>
-//     <option></option>
-//   </select>
-
-//   <label for="organicMaterials">Organic materials</label>
-//   <input
-//     type="checkbox"
-//     name="organicMaterials"
-//     checked={organicMaterials}
-//     onChange={handleCategories}
-//   />
-//   <label for="recycledMaterials">Recycled materials</label>
-//   <input
-//     type="checkbox"
-//     name="recycledMaterials"
-//     checked={recycledMaterials}
-//     onChange={handleCategories}
-//   />
-//   <label for="madeLocally">Made locally</label>
-//   <input
-//     type="checkbox"
-//     name="madeLocally"
-//     checked={madeLocally}
-//     onChange={handleCategories}
-//   />
-//   <label for="ethicallyMade">Made ethically</label>
-//   <input
-//     type="checkbox"
-//     name="ethicallyMade"
-//     checked={ethicallyMade}
-//     onChange={handleCategories}
-//   />
-//   <label for="crueltyFree">Cruelty-free</label>
-//   <input
-//     type="checkbox"
-//     name="crueltyFree"
-//     checked={crueltyFree}
-//     onChange={handleCrueltyFree}
-//   />
-//   <label for="vintageSecondHand">Vintage / Second-hand</label>
-//   <input
-//     type="checkbox"
-//     name="vintageSecondHand"
-//     checked={vintageSecondHand}
-//     onChange={handleVintageSecondHand}
-//   />
-// </div>;
-
-// const categories = {
-//   organicMaterials,
-//   recycledMaterials,
-//   madeLocally,
-//   crueltyFree,
-//   ethicallyMade,
-//   vintageSecondHand,
-// };
-
-// const dataToSend = {
-//   categories,
-// };
-
-// {
-//   /* <div>
-//           <p>Choose a category:</p>
-
-//           <label for="organicMaterials">Choose categories</label>
-//           <select multiple value={categories} onChange={handleCategories}>
-//             <option></option>
-//           </select>
-
-//           <label for="organicMaterials">Organic materials</label>
-//           <input
-//             type="checkbox"
-//             name="organicMaterials"
-//             checked={organicMaterials}
-//             onChange={handleCategories}
-//           />
-//           <label for="recycledMaterials">Recycled materials</label>
-//           <input
-//             type="checkbox"
-//             name="recycledMaterials"
-//             checked={recycledMaterials}
-//             onChange={handleCategories}
-//           />
-//           <label for="madeLocally">Made locally</label>
-//           <input
-//             type="checkbox"
-//             name="madeLocally"
-//             checked={madeLocally}
-//             onChange={handleCategories}
-//           />
-//           <label for="ethicallyMade">Made ethically</label>
-//           <input
-//             type="checkbox"
-//             name="ethicallyMade"
-//             checked={ethicallyMade}
-//             onChange={handleCategories}
-//           />
-//           <label for="crueltyFree">Cruelty-free</label>
-//           <input
-//             type="checkbox"
-//             name="crueltyFree"
-//             checked={crueltyFree}
-//             onChange={handleCrueltyFree}
-//           />
-//           <label for="vintageSecondHand">Vintage / Second-hand</label>
-//           <input
-//             type="checkbox"
-//             name="vintageSecondHand"
-//             checked={vintageSecondHand}
-//             onChange={handleVintageSecondHand}
-//           />
-//         </div> */
-// }
+export default EditStorePage;

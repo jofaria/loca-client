@@ -1,6 +1,7 @@
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import storeService from "../../services/store.services";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -23,7 +24,9 @@ function MapComponent() {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(API_URL + "/api/stores");
+        const response = await storeService.getAll();
+
+        //const response = await axios.get(API_URL + "/api/stores");
         const storesData = response.data;
         setStores(storesData);
       };
@@ -68,14 +71,14 @@ function MapComponent() {
 
         {selectedStore && (
           <Popup
-            latitude={selectedStore.location.coordinates[0]}
-            longitude={selectedStore.location.coordinates[1]}
+            latitude={selectedStore.location.coordinates[1]}
+            longitude={selectedStore.location.coordinates[0]}
             onClose={() => setSelectedStore(null)}
           >
             <div>
               <h3>{selectedStore.storeName}</h3>
               <p>{selectedStore.description}</p>
-              <p>Address: {selectedStore.location.address}</p>
+              <p>Address: {selectedStore.location.formattedAddress}</p>
             </div>
           </Popup>
         )}

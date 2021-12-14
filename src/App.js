@@ -10,6 +10,7 @@ import RegisterStorePage from "./pages/RegisterStorePage/RegisterStorePage";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import StoreDetailsPage from "./pages/StoreDetailsPage/StoreDetailsPage";
+import EditStorePage from "./pages/EditStorePage/EditStorePage";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
           }
         />
         <Route path="/:storeId" element={<StoreDetailsPage />} />
+        <Route path="/edit/:storeId" element={<EditStorePage />} />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

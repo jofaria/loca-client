@@ -1,5 +1,5 @@
-import { AuthContext } from "../../context/auth.context";
-import { useContext, useState } from "react";
+// import { AuthContext } from "../../context/auth.context";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -49,10 +49,6 @@ function StoreDetailsPage(props) {
               <h2>This is where the products will go</h2>
             </>
           )}
-
-          {/* <Link>
-            <button>Edit this store</button>
-          </Link> */}
         </>
       )}
     </div>

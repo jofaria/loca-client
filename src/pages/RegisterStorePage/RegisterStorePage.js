@@ -1,12 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 // import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
-// import authService from "../../services/auth.service";
-
-const API_URL = "http://localhost:5005";
+import storeService from "../../services/store.services";
 
 function RegisterStorePage(props) {
   const { owner } = useContext(AuthContext);
@@ -17,10 +15,10 @@ function RegisterStorePage(props) {
   const [coverImgURL, setCoverImgURL] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
+  // const [latitude, setLatitude] = useState(0);
+  // const [longitude, setLongitude] = useState(0);
   // const [errorMessage, setErrorMessage] = useState(undefined);
 
   // ? Category options
@@ -116,11 +114,8 @@ function RegisterStorePage(props) {
     };
 
     try {
-      const authToken = localStorage.getItem("authToken");
+      const response = await storeService.createOne(newStore);
 
-      const response = await axios.post(`${API_URL}/api/stores`, newStore, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
       const createdStore = response.data;
       const storeId = createdStore._id;
 
