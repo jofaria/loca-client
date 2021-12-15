@@ -1,7 +1,24 @@
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import ReactMapGL, {
+  Marker,
+  Popup,
+  FlyToInterpolator,
+  NavigationControl,
+} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "mapbox-gl";
 import { useState, useEffect } from "react";
 import storeService from "../../services/store.services";
+
+// had this.
+
+// added the following 6 lines.
+
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+mapboxgl.workerClass = MapboxWorker;
 
 const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
 
