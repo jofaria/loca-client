@@ -1,7 +1,6 @@
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { useState, useEffect } from "react";
 import storeService from "../../services/store.services";
-import { defaultMapStyle, dataLayer } from "./map-style.js";
 
 const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -40,7 +39,7 @@ function MapComponent() {
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={REACT_APP_MAPBOX}
-        mapStyle={defaultMapStyle}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
         onViewportChange={handleViewportChange}
       >
         {stores &&
