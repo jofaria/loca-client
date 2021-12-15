@@ -1,4 +1,5 @@
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import { useState, useEffect } from "react";
 import storeService from "../../services/store.services";
 
