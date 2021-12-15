@@ -9,8 +9,8 @@ function MapComponent() {
   const defaultMap = {
     latitude: 41.1579,
     longitude: -8.6291,
-    width: "100",
-    height: "50",
+    width: "100vw",
+    height: "50vh",
     zoom: 11,
   };
   const handleViewportChange = (newViewport) => {
