@@ -19,7 +19,7 @@ function StoreComponent() {
   return (
     <div>
       {stores && (
-        <div>
+        <div className="discover-stores">
           <h2>DISCOVER STORES</h2>
           <div className="stores-container">
             {stores.map((store) => {
@@ -36,11 +36,6 @@ function StoreComponent() {
                       <Card.Text>{store.description}</Card.Text>
                     </Card.Body>
                   </Card>
-
-                  {/* <div>
-                  <img className="store-logo" src={store.logo} alt="logo" />
-                  <p>{store.storeName}</p>
-                </div> */}
                 </Link>
               );
             })}

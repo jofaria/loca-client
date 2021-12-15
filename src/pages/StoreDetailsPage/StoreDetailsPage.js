@@ -34,7 +34,16 @@ function StoreDetailsPage(props) {
               alt="coverImg"
               className="store-coverImg"
             />
-            <img className="store-logo" src={store.logo} alt="logo" />
+            {store.image ? (
+              <img className="store-logo" alt="logo" src={store.logo} />
+            ) : (
+              <img
+                className="store-logo"
+                alt="logo"
+                src="https://www.aquiaolado.pt/Content/img/default-logo.png"
+              />
+            )}
+            <img className="store-logo" alt="logo" src={store.logo} />
             <h1>{store.storeName.toUpperCase()}</h1>
             <Link to={store.website}>
               <button> Website</button>

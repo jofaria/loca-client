@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
+import { Button } from "react-bootstrap";
 
 function MyNavbar() {
   const { isLoggedIn, owner } = useContext(AuthContext);
@@ -9,11 +10,11 @@ function MyNavbar() {
     <div>
       <nav className="Navbar">
         <Link to="/">
-          <h1 className="loca-logo">LOCA</h1>
+          <h1 className="loca-logo">L O C A</h1>
         </Link>
 
         <Link to="/register-store">
-          <button>Register Store</button>
+          <Button variant="primary">Register Store</Button>
         </Link>
 
         {!isLoggedIn && (

@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: "Montserrat", cursive;
-  background-color: ghostwhite;
+  background-color: #a6acaf;
 }
 
 a {
@@ -37,7 +37,6 @@ textarea {
 nav {
   display: flex;
   flex-wrap: wrap;
-  background: ghostwhite;
   color: black;
   padding: 0px 20px;
   /* width: 100vw; */
@@ -55,10 +54,10 @@ nav li {
 .card {
   width: 400px;
   padding: 10px;
-  box-shadow: 0px 2px 3px grey;
+  /* box-shadow: 0px 2px 3px grey; */
   margin: 0 auto;
   margin-bottom: 20px;
-  background: #94a7c8;
+  background: white;
   border-radius: 4px;
 }
 
@@ -115,7 +114,7 @@ nav li {
   background-color: #dfeef9;
 }
 .Navbar {
-  padding: 5px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -123,13 +122,6 @@ nav li {
 
 .profile-img-wrapper {
   width: 50px;
-}
-
-.profile-img {
-  width: 35px;
-  border-radius: 35px;
-  border: 2px solid black;
-  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .map-container {
@@ -168,7 +160,7 @@ nav li {
 }
 
 .main-header {
-  height: 30vh;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,15 +168,29 @@ nav li {
 
 .main-header h1 {
   padding: 5%;
+  position: absolute;
 }
 
 .stores-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: 40vh;
 }
 
 .store-component {
   margin: 10px;
+}
+
+.hero-image {
+  height: 50vh;
+}
+
+.discover-stores {
+  height: 100%;
+  background-color: white;
+  padding: 20px;
+}
+
+.map-component {
+  background-color: ghostwhite;
 }
