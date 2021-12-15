@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-const API_URL = process.env.REACT_APP_SERVER_URL;
+import storeService from "../../services/store.services";
+import { Card, Button } from "react-bootstrap";
 
 function StoreComponent() {
   const [stores, setStores] = useState(null);
@@ -9,7 +9,7 @@ function StoreComponent() {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(API_URL + "/api/stores");
+        const response = await storeService.getAll();
         const allStores = response.data;
         setStores(allStores);
       };
@@ -18,16 +18,35 @@ function StoreComponent() {
   }, []);
   return (
     <div>
-      {stores &&
-        stores.map((store) => {
-          return (
-            <Link to={store._id} key={store._id}>
-              <div>
-                <p>{store.storeName}</p>
-              </div>
-            </Link>
-          );
-        })}
+      {stores && (
+        <div>
+          <h2>DISCOVER STORES</h2>
+          <div className="stores-container">
+            {stores.map((store) => {
+              return (
+                <Link
+                  to={store._id}
+                  key={store._id}
+                  className="store-component"
+                >
+                  <Card style={{ width: "18rem", height: "auto" }}>
+                    <Card.Img variant="top store-logo" src={store.logo} />
+                    <Card.Body>
+                      <Card.Title>{store.storeName}</Card.Title>
+                      <Card.Text>{store.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+
+                  {/* <div>
+                  <img className="store-logo" src={store.logo} alt="logo" />
+                  <p>{store.storeName}</p>
+                </div> */}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

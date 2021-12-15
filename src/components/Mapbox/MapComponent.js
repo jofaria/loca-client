@@ -1,9 +1,7 @@
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import storeService from "../../services/store.services";
 
-const API_URL = process.env.REACT_APP_SERVER_URL;
 const REACT_APP_MAPBOX = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function MapComponent() {
@@ -26,7 +24,6 @@ function MapComponent() {
       const fetchData = async () => {
         const response = await storeService.getAll();
 
-        //const response = await axios.get(API_URL + "/api/stores");
         const storesData = response.data;
         setStores(storesData);
       };

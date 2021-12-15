@@ -3,13 +3,11 @@ import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-// import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
 import storeService from "../../services/store.services";
 
 function EditStorePage(props) {
   const { owner } = useContext(AuthContext);
-  // const [store, setStore] = useState(null);
 
   const { storeId } = useParams();
 
@@ -27,8 +25,6 @@ function EditStorePage(props) {
   const handleStoreName = (e) => setStoreName(e.target.value);
   // const handleCoverImg = (e) => setCoverImg(); // .files
   const handleAddress = (e) => setAddress(e.target.value);
-  // const handleLatitude = (e) => setLatitude(e.target.value);
-  // const handleLongitude = (e) => setLongitude(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
@@ -64,21 +60,11 @@ function EditStorePage(props) {
     };
 
     try {
-      const response = await storeService.updateOne(storeId, updateStore);
-
-      // const authToken = localStorage.getItem("authToken");
-
-      // const response = await axios.post(`${API_URL}/api/stores`, newStore, {
-      //   headers: { Authorization: `Bearer ${authToken}` },
-      // });
-      const updatedStore = response.data;
-      //const storeId = updatedStore._id;
+      await storeService.updateOne(storeId, updateStore);
 
       setStoreName("");
       setLogoURL("");
       setAddress("");
-      // setLatitude(0);
-      // setLongitude(0);
       setCoverImgURL("");
       setDescription("");
       setWebsite("");

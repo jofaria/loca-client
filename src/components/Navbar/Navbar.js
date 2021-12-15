@@ -2,46 +2,44 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
-function Navbar() {
-  // Get the value from the context
-  const { isLoggedIn, owner, logOutUser } = useContext(AuthContext);
+function MyNavbar() {
+  const { isLoggedIn, owner } = useContext(AuthContext);
 
   return (
-    <nav className="Navbar">
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+    <div>
+      <nav className="Navbar">
+        <Link to="/">
+          <h1 className="loca-logo">LOCA</h1>
+        </Link>
 
-      {isLoggedIn && (
-        <>
-          <button onClick={logOutUser}>Logout</button>
-          <Link to="/register-store">
-            <button>Register Store</button>
-          </Link>
-        </>
-      )}
+        <Link to="/register-store">
+          <button>Register Store</button>
+        </Link>
 
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            <button>Sign Up</button>
-          </Link>
+        {!isLoggedIn && (
+          <>
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
 
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        </>
-      )}
-
-      <div className="profile-img-wrapper">
-        {owner && (
-          <Link to="/profile">
-            <p>{owner.username}</p>
-          </Link>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          </>
         )}
-      </div>
-    </nav>
+
+        <div>
+          {owner && (
+            <div>
+              <Link to="/profile">
+                <p className="profile-link">Profile</p>
+              </Link>
+            </div>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 }
 
-export default Navbar;
+export default MyNavbar;

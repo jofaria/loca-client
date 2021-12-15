@@ -2,11 +2,14 @@
 
 body {
   margin: 0;
+  font-family: "Montserrat", cursive;
+  background-color: ghostwhite;
 }
 
 a {
   list-style: none;
   color: black;
+  text-decoration: none;
 }
 
 button,
@@ -32,11 +35,12 @@ textarea {
 }
 
 nav {
-  background: #515f7d;
-  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  background: ghostwhite;
+  color: black;
   padding: 0px 20px;
-  box-shadow: 0px 1px 2px gray;
-  width: 100%;
+  /* width: 100vw; */
   margin-bottom: 15px;
   padding: 5px;
 }
@@ -141,4 +145,46 @@ nav li {
 .custom-pin img {
   width: 100%;
   height: 100%;
+}
+
+.loca-logo {
+  font-family: "Comfortaa";
+  font-size: 2.5em;
+  margin: 10px 0 10px 0;
+}
+
+.store-logo {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.store-coverImg {
+  width: 100vw;
+}
+
+.store-header {
+  height: 400px;
+}
+
+.main-header {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-header h1 {
+  padding: 5%;
+}
+
+.stores-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 40vh;
+}
+
+.store-component {
+  margin: 10px;
 }

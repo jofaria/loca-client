@@ -31,7 +31,7 @@ class StoreService {
 
   // GET /api/stores/:id
   getOne = async (id) => {
-    return this.api.get(`/api/examples/${id}`);
+    return this.api.get(`/api/stores/${id}`);
   };
 
   // PUT /api/stores/:id

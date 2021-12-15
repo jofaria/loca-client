@@ -4,7 +4,7 @@ import ownerService from "../../services/owner.service";
 import { Link } from "react-router-dom";
 
 function ProfilePage() {
-  const { owner } = useContext(AuthContext);
+  const { owner, logOutUser } = useContext(AuthContext);
   const [currentOwner, setCurrentOwner] = useState(null);
 
   useEffect(() => {
@@ -23,10 +23,19 @@ function ProfilePage() {
 
   return (
     <div>
-      <h1>Profile Page</h1>
       {currentOwner && (
         <div>
-          <h2>User: {currentOwner.username}</h2>
+          <div>
+            <h1> Welcome, {currentOwner.username}</h1>
+            <>
+              <button onClick={logOutUser}>Logout</button>
+            </>
+          </div>
+          {currentOwner.store.length === 0 && (
+            <h2> You don't have any registered stores.</h2>
+          )}
+
+          {currentOwner.store.length !== 0 && <h2> Manage your stores</h2>}
 
           {currentOwner.store.map((eachStore) => {
             return (

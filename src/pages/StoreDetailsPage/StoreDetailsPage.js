@@ -1,10 +1,7 @@
-// import { AuthContext } from "../../context/auth.context";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
-
-const API_URL = process.env.REACT_APP_SERVER_URL;
+import storeService from "../../services/store.services";
 
 function StoreDetailsPage(props) {
   const [store, setStore] = useState(null);
@@ -15,7 +12,7 @@ function StoreDetailsPage(props) {
   useState(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/stores/${storeId}`);
+        const response = await storeService.getOne(storeId);
         const foundStore = response.data;
         setStore(foundStore);
         //setLoading(false);
@@ -29,21 +26,29 @@ function StoreDetailsPage(props) {
 
   return (
     <div>
-      <h1>This is my store</h1>
       {store && (
         <>
-          <h1>{store.storeName}</h1>
+          <div ClassName="store-header">
+            <img
+              src={store.coverImg}
+              alt="coverImg"
+              className="store-coverImg"
+            />
+            <img className="store-logo" src={store.logo} alt="logo" />
+            <h1>{store.storeName.toUpperCase()}</h1>
+            <Link to={store.website}>
+              <button> Website</button>
+            </Link>
+            <Link to={store.instagram}>
+              <button> Instagram </button>
+            </Link>
+          </div>
+          <p>
+            <b>Address:</b> {store.address}
+          </p>
           <p>{store.description}</p>
-          <img src={store.logo} alt="logo" />
-          <img src={store.coverImg} alt="coverImg" />
-          <Link to={store.website}>
-            <button> Website</button>
-          </Link>
-          <Link to={store.instagram}>
-            <button> Instagram</button>
-          </Link>
 
-          {store.products && (
+          {store.products.length !== 0 && (
             <>
               <h2>This is where the products will go</h2>
             </>
