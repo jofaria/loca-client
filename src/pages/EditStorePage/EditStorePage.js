@@ -125,9 +125,11 @@ function EditStorePage(props) {
 
           <label>Logo:</label>
           <input
-            // src={thisStore.logo}
+            className="input-file"
+            type="file"
             onChange={handleImageUpload}
           />
+
           <label>Description:</label>
           <input
             type="text"
