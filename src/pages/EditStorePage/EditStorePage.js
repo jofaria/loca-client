@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
@@ -70,6 +70,8 @@ function EditStorePage(props) {
     if (address === "") {
       alert("Please fill in all the fields");
     }
+
+    console.log("address before sending", address);
     const updateStore = {
       storeName,
       storeOwner: owner._id,
@@ -83,7 +85,7 @@ function EditStorePage(props) {
 
     try {
       await storeService.updateOne(storeId, updateStore);
-
+      console.log("address after sending", address);
       setStoreName("");
       setLogoURL("");
       setAddress("");
@@ -123,13 +125,9 @@ function EditStorePage(props) {
 
           <label>Logo:</label>
           <input
-            type="file"
-            class="custom-file-input"
-            id="customFile"
             // src={thisStore.logo}
             onChange={handleImageUpload}
           />
-
           <label>Description:</label>
           <input
             type="text"

@@ -131,7 +131,7 @@ function RegisterStorePage(props) {
 
       navigate("/" + storeId);
     } catch (error) {
-      console.log(error);
+      setErrorMessage("Please enter valid fields.");
     }
   };
 
