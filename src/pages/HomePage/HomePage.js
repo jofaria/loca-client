@@ -15,7 +15,7 @@ function HomePage() {
           </h1>{" "}
           <Link to="/register-store">
             <Button variant="primary" id="btn-register-store">
-              REGISTER STORE
+              REGISTER A STORE
             </Button>
           </Link>
         </div>

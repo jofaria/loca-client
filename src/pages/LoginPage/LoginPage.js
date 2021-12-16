@@ -31,17 +31,12 @@ function LoginPage(props) {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
-      // or with a service
-      // const response = await authService.login(requestBody);
-
-      // Save the token and set the user as logged in ...
       const token = response.data.authToken;
       logInUser(token);
 
       navigate("/");
     } catch (error) {
-      // If the request resolves with an error, set the error message in the state
-      setErrorMessage("Something went wrong");
+      setErrorMessage("Provide valid email and password");
     }
   };
 
@@ -67,7 +62,9 @@ function LoginPage(props) {
             onChange={handlePassword}
           />
 
-          <button type="submit">Login</button>
+          <button className="my-btn-white" type="submit">
+            Login
+          </button>
         </form>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
@@ -75,6 +72,7 @@ function LoginPage(props) {
           Don't have an account yet? <Link to={"/signup"}> Sign Up</Link>
         </p>
       </div>
+      <img src={"/images/form-bg.png"} alt="woman-with-jacket" />
     </div>
   );
 }

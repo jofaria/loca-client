@@ -59,6 +59,9 @@ function EditStorePage(props) {
     } catch (error) {}
   };
 
+  if (logoURL === "") {
+    setLogoURL("/images/logo-removebg-preview.png");
+  }
   // ? HANDLE SUBMIT
 
   const handleStoreSubmit = async (e) => {
@@ -105,12 +108,12 @@ function EditStorePage(props) {
   };
 
   return (
-    <div className="EditStorePage">
+    <div className="storeForms">
       <h1>Edit Store</h1>
 
       <form onSubmit={handleStoreSubmit}>
         {thisStore && (
-          <div>
+          <>
             <label>Store Name:</label>
             <input
               type="text"
@@ -121,6 +124,8 @@ function EditStorePage(props) {
             <label>Logo:</label>
             <input
               type="file"
+              class="custom-file-input"
+              id="customFile"
               src={thisStore.logo}
               onChange={handleImageUpload}
             />
@@ -154,12 +159,19 @@ function EditStorePage(props) {
               defaultValue={thisStore.instagram}
               onChange={handleInstagram}
             />
-            <button type="submit">Edit Store</button>
-          </div>
+            <button className="my-btn-white" type="submit">
+              EDIT STORE
+            </button>
+          </>
         )}
       </form>
-
-      <button onClick={handleDeleteStore}> Delete Store </button>
+      <img
+        src={"/images/person-sweater-cropped-no-bg.png"}
+        alt="woman-with-jacket"
+      />
+      <button className="delete-btn" onClick={handleDeleteStore}>
+        DELETE STORE
+      </button>
     </div>
   );
 }

@@ -43,6 +43,7 @@ nav li {
   font-family: "Comfortaa";
   font-size: 2.5em;
   margin: 10px 0 10px 15px;
+  letter-spacing: 10px;
 }
 nav button {
   background-color: #191a1a;
@@ -58,12 +59,21 @@ nav button {
   width: 100px;
 }
 
-#btn-signup {
+.my-btn-white {
   background-color: white;
-  color: black;
+  color: black !important;
   font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  min-width: 100px;
+  margin: 5px;
+  font-size: 15px;
+  height: 40px;
 }
-#btn-login {
+
+.my-btn-black {
   font-weight: bold;
   box-shadow: black;
 }
@@ -79,11 +89,6 @@ select {
   height: 40px;
 }
 
-label {
-  width: 200px;
-  display: block;
-}
-
 input,
 textarea {
   width: 200px;
@@ -93,12 +98,22 @@ textarea {
 }
 
 .card {
-  width: 400px;
+  width: 80vw;
+  max-width: 600px;
   padding: 10px;
   margin: 0 auto;
   margin-bottom: 20px;
   background: white;
   border-radius: 4px;
+  color: black;
+}
+
+.authContainers img {
+  position: absolute;
+  bottom: 0px;
+  height: 100vh;
+  left: 5%;
+  z-index: -1;
 }
 
 .authContainers {
@@ -109,7 +124,6 @@ textarea {
   height: 80vh;
 }
 
-.EditProjectPage,
 .AddProject,
 .AddTask,
 .SignupPage,
@@ -138,7 +152,6 @@ textarea {
   text-decoration: underline;
 }
 
-.EditProjectPage form,
 .AddTask form,
 .AddProject form,
 .SignupPage form,
@@ -150,6 +163,9 @@ textarea {
 
 /* * MAP */
 
+div .map-component {
+  background-color: #191a1a;
+}
 .map-container {
   height: 400px;
 }
@@ -173,10 +189,11 @@ textarea {
 
 .store-coverImg {
   width: 100vw;
+  position: relative;
 }
 
 .store-header {
-  height: 400px;
+  margin: 10% auto;
 }
 
 .main-header {
@@ -253,25 +270,26 @@ textarea {
 
 .profile-container {
   color: white;
+  max-width: 900px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: #424242;
-  align-items: center;
-  max-width: 70vw;
   border-radius: 10px;
-  padding-top: 30px;
-}
-
-div .card {
-  color: black;
+  background: #191a1a;
+  border: 1px solid grey;
+  box-shadow: 0px 2px 3px grey;
+  margin: 0 auto;
+  min-height: 40vh;
+  margin-bottom: 40px;
 }
 
 .profile-header {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 40px;
 }
 
 .profile-header > * {
@@ -280,4 +298,84 @@ div .card {
 
 a:hover {
   cursor: pointer;
+}
+
+.error-message {
+  color: rgb(177, 23, 23);
+}
+
+.storeForms {
+  background-color: #191a1a;
+  color: white;
+  max-width: 50vw;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 20px 0 20px 0;
+}
+
+.storeForms form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.storeForms input {
+  margin-bottom: 25px;
+}
+.storeForms img {
+  position: absolute;
+  bottom: 0px;
+  height: 100vh;
+  left: 5%;
+  z-index: -1;
+}
+
+.delete-btn {
+  background-color: rgb(177, 23, 23);
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+  min-width: 150px;
+  margin: 20px 0 20px 0;
+}
+
+/* .storeDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  height: 80vw;
+} */
+
+.footer {
+  border-top: 1px solid #0f0f0f;
+  background-color: #191a1a;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  bottom: 0;
+  position: fixed;
+  flex-wrap: wrap;
+}
+
+.footer * {
+  color: ghostwhite;
+  margin: 5px 60px;
+  align-self: center;
+}
+
+button {
+  border-radius: 20px;
+  border: none;
+  min-width: 100px;
+  text-transform: uppercase;
+}
+
+.storeDetailsContainer .details-bg {
+  max-width: 90vw;
+  position: absolute;
+  bottom: 0px;
+  left: 5%;
+  z-index: -1;
 }

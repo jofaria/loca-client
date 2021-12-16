@@ -11,17 +11,17 @@ function MyNavbar() {
       <nav className="Navbar">
         <div>
           <Link to="/">
-            <h1 className="loca-logo">L O C A</h1>
+            <h1 className="loca-logo">LOCA</h1>
           </Link>
         </div>
         {!isLoggedIn && (
           <div>
             <Link to="/signup">
-              <Button id="btn-signup">SIGN UP</Button>
+              <Button className="my-btn-white">SIGN UP</Button>
             </Link>
 
             <Link to="/login">
-              <Button id="btn-login">LOGIN</Button>
+              <Button className="my-btn-black">LOGIN</Button>
             </Link>
           </div>
         )}
@@ -29,7 +29,7 @@ function MyNavbar() {
         {owner && (
           <div>
             <Link to="/profile">
-              <Button className="profile-link">Profile</Button>
+              <Button className="profile-link">PROFILE</Button>
             </Link>
           </div>
         )}

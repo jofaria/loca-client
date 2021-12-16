@@ -10,6 +10,7 @@ import RegisterStorePage from "./pages/RegisterStorePage/RegisterStorePage";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import StoreDetailsPage from "./pages/StoreDetailsPage/StoreDetailsPage";
 import EditStorePage from "./pages/EditStorePage/EditStorePage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/edit/:storeId" element={<EditStorePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

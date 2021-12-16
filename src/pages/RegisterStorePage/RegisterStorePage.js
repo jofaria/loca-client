@@ -40,6 +40,7 @@ function RegisterStorePage(props) {
   const handleImageUpload = async (e) => {
     try {
       const uploadData = new FormData();
+      console.log(uploadData);
 
       uploadData.append("logo", e.target.files[0]);
 
@@ -47,6 +48,10 @@ function RegisterStorePage(props) {
       setLogoURL(response.data.secure_url);
     } catch (error) {}
   };
+
+  if (logoURL === "") {
+    setLogoURL("/images/logo-removebg-preview.png");
+  }
 
   // const handleCoverImgUpload = async (e) => {
   //   try {
@@ -131,7 +136,7 @@ function RegisterStorePage(props) {
   };
 
   return (
-    <div className="RegisterStorePage">
+    <div className="storeForms">
       <h1>Register Store</h1>
 
       <form onSubmit={handleStoreSubmit}>
@@ -139,7 +144,11 @@ function RegisterStorePage(props) {
         <input type="text" value={storeName} onChange={handleStoreName} />
 
         <label>Logo:</label>
-        <input type="file" onChange={handleImageUpload} />
+        <input
+          className="input-file"
+          type="file"
+          onChange={handleImageUpload}
+        />
 
         {/* <label>Cover Image:</label>
         <input type="file" onChange={handleCoverImgUpload} /> */}
@@ -190,10 +199,16 @@ function RegisterStorePage(props) {
           value={instagram}
           onChange={handleInstagram}
         />
-        <button type="submit">Register Store</button>
+        <button className="my-btn-white" type="submit">
+          SUBMIT
+        </button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <img
+        src={"/images/person-sweater-cropped-no-bg.png"}
+        alt="woman-with-jacket"
+      />
     </div>
   );
 }

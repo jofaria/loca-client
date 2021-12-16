@@ -75,19 +75,19 @@ function MapComponent() {
           })}
 
         {selectedStore && (
-          <Link to={selectedStore._id}>
-            <Popup
-              latitude={selectedStore.location.coordinates[1]}
-              longitude={selectedStore.location.coordinates[0]}
-              onClose={() => setSelectedStore(null)}
-            >
-              <div>
+          <Popup
+            latitude={selectedStore.location.coordinates[1]}
+            longitude={selectedStore.location.coordinates[0]}
+            onClose={() => setSelectedStore(null)}
+          >
+            <div>
+              <Link to={selectedStore._id}>
                 <h3>{selectedStore.storeName}</h3>
                 <p>{selectedStore.description}</p>
                 <p>Address: {selectedStore.location.formattedAddress}</p>
-              </div>
-            </Popup>
-          </Link>
+              </Link>
+            </div>
+          </Popup>
         )}
       </ReactMapGL>
     </div>

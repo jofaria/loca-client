@@ -27,42 +27,37 @@ function StoreDetailsPage(props) {
   return (
     <div>
       {store && (
-        <>
-          <div ClassName="store-header">
-            <img
+        <div className="storeDetailsContainer">
+          <div className="store-header">
+            {/* <img
               src={store.coverImg}
               alt="coverImg"
               className="store-coverImg"
-            />
-            {store.image ? (
-              <img className="store-logo" alt="logo" src={store.logo} />
-            ) : (
-              <img
-                className="store-logo"
-                alt="logo"
-                src="https://www.aquiaolado.pt/Content/img/default-logo.png"
-              />
-            )}
+            /> */}
             <img className="store-logo" alt="logo" src={store.logo} />
             <h1>{store.storeName.toUpperCase()}</h1>
-            <Link to={store.website}>
-              <button> Website</button>
-            </Link>
-            <Link to={store.instagram}>
-              <button> Instagram </button>
-            </Link>
-          </div>
-          <p>
-            <b>Address:</b> {store.address}
-          </p>
-          <p>{store.description}</p>
+            {store.website && (
+              <Link to={store.website}>
+                <button> Website</button>
+              </Link>
+            )}
+            {store.instagram && (
+              <Link to={store.instagram}>
+                <button> Instagram </button>
+              </Link>
+            )}
 
-          {store.products.length !== 0 && (
-            <>
-              <h2>This is where the products will go</h2>
-            </>
-          )}
-        </>
+            <p>
+              <b>Address:</b> {store.address}
+            </p>
+            <p>{store.description}</p>
+            <img
+              className="details-bg"
+              src="/images/person-sweater-no-bg.png"
+              alt="store-with-hangers"
+            />
+          </div>
+        </div>
       )}
     </div>
   );

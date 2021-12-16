@@ -30,7 +30,7 @@ function SignupPage(props) {
       navigate("/login");
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
-      setErrorMessage(error.response.data.message);
+      setErrorMessage("Please enter valid fields.");
     }
   };
 
@@ -72,7 +72,9 @@ function SignupPage(props) {
             onChange={handlePhone}
           />
 
-          <button type="submit">Sign Up</button>
+          <button className="my-btn-white" type="submit">
+            Sign Up
+          </button>
         </form>
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -81,6 +83,7 @@ function SignupPage(props) {
           Already have account? <Link to={"/login"}> Login</Link>
         </p>
       </div>
+      <img src={"/images/form-bg.png"} alt="woman-with-jacket" />
     </div>
   );
 }

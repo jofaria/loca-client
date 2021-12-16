@@ -29,11 +29,20 @@ function ProfilePage() {
           <div className="profile-header">
             <h2> Welcome, {currentOwner.username}</h2>
 
-            <button onClick={logOutUser}>Logout</button>
+            <Button className="my-btn-white" onClick={logOutUser}>
+              LOGOUT
+            </Button>
           </div>
 
           {currentOwner.store.length === 0 && (
-            <h2> You don't have any registered stores.</h2>
+            <>
+              <h2> You don't have any registered stores.</h2>
+              <Link to="/register-store">
+                <Button variant="primary" className="my-btn-white">
+                  REGISTER A STORE
+                </Button>
+              </Link>
+            </>
           )}
 
           {currentOwner.store.length !== 0 && <h2> Manage your stores</h2>}
@@ -57,7 +66,7 @@ function ProfilePage() {
                     <Card.Title>{eachStore.address}</Card.Title>
                     <Card.Text>{eachStore.description}</Card.Text>
                     <Link to={"/edit/" + eachStore._id}>
-                      <Button variant="primary">Edit</Button>
+                      <Button className="my-btn-black">Edit</Button>
                     </Link>
                   </Card.Body>
                 </Card>
