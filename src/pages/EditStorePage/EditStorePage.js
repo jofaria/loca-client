@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
@@ -10,6 +10,7 @@ function EditStorePage(props) {
   const { owner } = useContext(AuthContext);
 
   const { storeId } = useParams();
+  const [thisStore, setThisStore] = useState(null);
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
@@ -19,6 +20,24 @@ function EditStorePage(props) {
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await storeService.getOne(storeId);
+        const retrievedStore = response.data;
+        setThisStore(retrievedStore);
+        setStoreName(retrievedStore.storeName);
+        setLogoURL(retrievedStore.logo);
+        setCoverImgURL(retrievedStore.coverImg);
+        setDescription(retrievedStore.description);
+        setAddress(retrievedStore.address);
+        setWebsite(retrievedStore.website);
+        setInstagram(retrievedStore.instagram);
+      } catch (error) {}
+    };
+    fetchData();
+  }, []);
 
   // ? HANDLE FUNCTIONS
 
@@ -90,59 +109,54 @@ function EditStorePage(props) {
       <h1>Edit Store</h1>
 
       <form onSubmit={handleStoreSubmit}>
-        <label>Store Name:</label>
-        <input type="text" value={storeName} onChange={handleStoreName} />
+        {thisStore && (
+          <div>
+            <label>Store Name:</label>
+            <input
+              type="text"
+              defaultValue={thisStore.storeName}
+              onChange={handleStoreName}
+            />
 
-        <label>Logo:</label>
-        <input type="file" onChange={handleImageUpload} />
+            <label>Logo:</label>
+            <input
+              type="file"
+              src={thisStore.logo}
+              onChange={handleImageUpload}
+            />
 
-        <label>Description:</label>
-        <input type="text" value={description} onChange={handleDescription} />
+            <label>Description:</label>
+            <input
+              type="text"
+              defaultValue={thisStore.description}
+              onChange={handleDescription}
+            />
 
-        {/* <label>Location:</label>
-        <input
-          type="text"
-          name="location"
-          value={location}
-          onChange={handleLocation}
-        /> */}
+            <label>Address:</label>
+            <input
+              type="text"
+              name="address"
+              defaultValue={thisStore.address}
+              onChange={handleAddress}
+            />
 
-        <label>Address:</label>
-        <input
-          type="text"
-          name="address"
-          value={address}
-          onChange={handleAddress}
-        />
-        {/* <label>Latitude:</label>
-        <input
-          type="number"
-          name="latitude"
-          value={latitude}
-          onChange={handleLatitude}
-        />
-        <label>Longitude:</label>
-        <input
-          type="number"
-          name="longitude"
-          value={longitude}
-          onChange={handleLongitude}
-        /> */}
-        <label>Website:</label>
-        <input
-          type="text"
-          name="website"
-          value={website}
-          onChange={handleWebsite}
-        />
-        <label>Instagram:</label>
-        <input
-          type="text"
-          name="instagram"
-          value={instagram}
-          onChange={handleInstagram}
-        />
-        <button type="submit">Edit Store</button>
+            <label>Website:</label>
+            <input
+              type="text"
+              name="website"
+              defaultValue={thisStore.website}
+              onChange={handleWebsite}
+            />
+            <label>Instagram:</label>
+            <input
+              type="text"
+              name="instagram"
+              defaultValue={thisStore.instagram}
+              onChange={handleInstagram}
+            />
+            <button type="submit">Edit Store</button>
+          </div>
+        )}
       </form>
 
       <button onClick={handleDeleteStore}> Delete Store </button>

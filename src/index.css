@@ -3,7 +3,13 @@
 body {
   margin: 0;
   font-family: "Montserrat", cursive;
-  background-color: #a6acaf;
+  background: rgb(236, 237, 238);
+  background: linear-gradient(
+    90deg,
+    rgba(236, 237, 238, 1) 0%,
+    rgba(171, 172, 173, 1) 43%,
+    rgba(130, 134, 135, 1) 100%
+  );
 }
 
 a {
@@ -12,12 +18,64 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
+/* ?? NAVBAR  */
+
+.Navbar {
+  overflow: hidden;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav li {
+  list-style: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.loca-logo {
+  font-family: "Comfortaa";
+  font-size: 2.5em;
+  margin: 10px 0 10px 15px;
+}
+nav button {
+  background-color: #191a1a;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  min-width: 50px;
+  margin: 5px;
+  font-size: 15px;
+  height: 40px;
+  width: 100px;
+}
+
+#btn-signup {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+#btn-login {
+  font-weight: bold;
+  box-shadow: black;
+}
+
+/* ?? NAVBAR  */
+
 button,
 select {
   padding: 5px 10px;
   min-width: 50px;
   margin: 5px;
-  font-size: 18px;
+  font-size: 15px;
   height: 40px;
 }
 
@@ -34,36 +92,21 @@ textarea {
   margin: 10px;
 }
 
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  color: black;
-  padding: 0px 20px;
-  /* width: 100vw; */
-  margin-bottom: 15px;
-  padding: 5px;
-}
-
-nav li {
-  list-style: none;
-  color: white;
-  font-size: 24px;
-  font-weight: 600;
-}
-
 .card {
   width: 400px;
   padding: 10px;
-  /* box-shadow: 0px 2px 3px grey; */
   margin: 0 auto;
   margin-bottom: 20px;
   background: white;
   border-radius: 4px;
 }
 
-.ProjectCard h3::after {
-  content: url("https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/m3/icon-expand.png");
-  margin-left: 5px;
+.authContainers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 200px;
+  height: 80vh;
 }
 
 .EditProjectPage,
@@ -71,10 +114,11 @@ nav li {
 .AddTask,
 .SignupPage,
 .LoginPage {
-  background: #f9eec3;
+  background: #191a1a;
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
-  width: 400px;
+  max-width: 400px;
+  min-width: 300px;
   text-align: center;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -82,17 +126,16 @@ nav li {
   border-radius: 4px;
 }
 
-.EditProjectPage {
-  background-color: rgb(239, 196, 88);
+.LoginPage,
+.SignupPage {
+  background-color: #191a1a;
+  color: white;
 }
 
-.SignupPage,
-.LoginPage {
-  background-color: #608dd5;
-}
-
-.LoginPage {
-  background-color: #94a7c8;
+.LoginPage > p > a,
+.SignupPage > p > a {
+  color: white;
+  text-decoration: underline;
 }
 
 .EditProjectPage form,
@@ -105,24 +148,7 @@ nav li {
   align-items: center;
 }
 
-.AddTask button,
-.AddProject button {
-  display: block;
-}
-
-.TaskCard {
-  background-color: #dfeef9;
-}
-.Navbar {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.profile-img-wrapper {
-  width: 50px;
-}
+/* * MAP */
 
 .map-container {
   height: 400px;
@@ -137,12 +163,6 @@ nav li {
 .custom-pin img {
   width: 100%;
   height: 100%;
-}
-
-.loca-logo {
-  font-family: "Comfortaa";
-  font-size: 2.5em;
-  margin: 10px 0 10px 0;
 }
 
 .store-logo {
@@ -162,13 +182,18 @@ nav li {
 .main-header {
   height: 50vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .main-header h1 {
-  padding: 5%;
-  position: absolute;
+  padding: 2%;
+}
+
+.discover-stores h2 {
+  font-size: 40px;
+  padding: 20px 0 20px 0;
 }
 
 .stores-container {
@@ -181,16 +206,78 @@ nav li {
   margin: 10px;
 }
 
+.store-component .card {
+  background-color: #191a1a;
+  color: white;
+}
+
 .hero-image {
   height: 50vh;
+  position: absolute;
+  z-index: -1;
 }
 
 .discover-stores {
   height: 100%;
-  background-color: white;
+  color: white;
+  background-color: #191a1a;
   padding: 20px;
 }
 
 .map-component {
   background-color: ghostwhite;
+}
+
+#btn-register-store {
+  font-family: "Montserrat";
+  width: 190px;
+  background-color: #191a1a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+#search-bar {
+  border: 2px solid white;
+  width: 50vw;
+  max-width: 400px;
+  border-radius: 20px;
+  margin: 5px 0 50px 0;
+}
+
+.profile-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #424242;
+  align-items: center;
+  max-width: 70vw;
+  border-radius: 10px;
+  padding-top: 30px;
+}
+
+div .card {
+  color: black;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.profile-header > * {
+  margin: 10px;
+}
+
+a:hover {
+  cursor: pointer;
 }

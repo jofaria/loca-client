@@ -17,9 +17,8 @@ function RegisterStorePage(props) {
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
-  // const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   // ? Category options
   // const [categories, setCategories] = useState([]);
@@ -34,8 +33,6 @@ function RegisterStorePage(props) {
 
   const handleStoreName = (e) => setStoreName(e.target.value);
   const handleAddress = (e) => setAddress(e.target.value);
-  // const handleLatitude = (e) => setLatitude(e.target.value);
-  // const handleLongitude = (e) => setLongitude(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
   const handleWebsite = (e) => setWebsite(e.target.value);
   const handleInstagram = (e) => setInstagram(e.target.value);
@@ -50,6 +47,7 @@ function RegisterStorePage(props) {
       setLogoURL(response.data.secure_url);
     } catch (error) {}
   };
+
   // const handleCoverImgUpload = async (e) => {
   //   try {
   //     const uploadData = new FormData();
@@ -121,8 +119,6 @@ function RegisterStorePage(props) {
       setStoreName("");
       setLogoURL("");
       setAddress("");
-      // setLatitude(0);
-      // setLongitude(0);
       setCoverImgURL("");
       setDescription("");
       setWebsite("");
@@ -196,6 +192,8 @@ function RegisterStorePage(props) {
         />
         <button type="submit">Register Store</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

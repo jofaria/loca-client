@@ -3,6 +3,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useState, useEffect } from "react";
 import storeService from "../../services/store.services";
+import { Link } from "react-router-dom";
 
 // @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
@@ -46,7 +47,7 @@ function MapComponent() {
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={REACT_APP_MAPBOX}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle="mapbox://styles/mapbox/dark-v10"
         onViewportChange={handleViewportChange}
       >
         {stores &&
@@ -67,24 +68,26 @@ function MapComponent() {
                     setSelectedStore(store);
                   }}
                 >
-                  <img src="/images/pin.png" alt="store-location-pin" />
+                  <img src="/images/pin-white.png" alt="store-location-pin" />
                 </div>
               </Marker>
             );
           })}
 
         {selectedStore && (
-          <Popup
-            latitude={selectedStore.location.coordinates[1]}
-            longitude={selectedStore.location.coordinates[0]}
-            onClose={() => setSelectedStore(null)}
-          >
-            <div>
-              <h3>{selectedStore.storeName}</h3>
-              <p>{selectedStore.description}</p>
-              <p>Address: {selectedStore.location.formattedAddress}</p>
-            </div>
-          </Popup>
+          <Link to={selectedStore._id}>
+            <Popup
+              latitude={selectedStore.location.coordinates[1]}
+              longitude={selectedStore.location.coordinates[0]}
+              onClose={() => setSelectedStore(null)}
+            >
+              <div>
+                <h3>{selectedStore.storeName}</h3>
+                <p>{selectedStore.description}</p>
+                <p>Address: {selectedStore.location.formattedAddress}</p>
+              </div>
+            </Popup>
+          </Link>
         )}
       </ReactMapGL>
     </div>

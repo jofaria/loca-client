@@ -1,7 +1,7 @@
 function ErrorPage() {
   return (
     <div>
-      <h1>404 Not Found</h1>
+      <h1>Sorry, we couldn't find this page.</h1>
     </div>
   );
 }

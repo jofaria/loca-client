@@ -37,7 +37,6 @@ function App() {
         />
         <Route path="/:storeId" element={<StoreDetailsPage />} />
         <Route path="/edit/:storeId" element={<EditStorePage />} />
-
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

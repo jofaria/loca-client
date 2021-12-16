@@ -9,35 +9,30 @@ function MyNavbar() {
   return (
     <div>
       <nav className="Navbar">
-        <Link to="/">
-          <h1 className="loca-logo">L O C A</h1>
-        </Link>
-
-        <Link to="/register-store">
-          <Button variant="primary">Register Store</Button>
-        </Link>
-
+        <div>
+          <Link to="/">
+            <h1 className="loca-logo">L O C A</h1>
+          </Link>
+        </div>
         {!isLoggedIn && (
-          <>
+          <div>
             <Link to="/signup">
-              <button>Sign Up</button>
+              <Button id="btn-signup">SIGN UP</Button>
             </Link>
 
             <Link to="/login">
-              <button>Login</button>
+              <Button id="btn-login">LOGIN</Button>
             </Link>
-          </>
+          </div>
         )}
 
-        <div>
-          {owner && (
-            <div>
-              <Link to="/profile">
-                <p className="profile-link">Profile</p>
-              </Link>
-            </div>
-          )}
-        </div>
+        {owner && (
+          <div>
+            <Link to="/profile">
+              <Button className="profile-link">Profile</Button>
+            </Link>
+          </div>
+        )}
       </nav>
     </div>
   );
