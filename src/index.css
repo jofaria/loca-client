@@ -307,10 +307,12 @@ a:hover {
 .storeForms {
   background-color: #191a1a;
   color: white;
-  max-width: 50vw;
+  width: 60vw;
+  max-width: 80vw;
   border-radius: 10px;
   margin: 0 auto;
   padding: 20px 0 20px 0;
+  margin-bottom: 100px;
 }
 
 .storeForms form {
@@ -319,9 +321,6 @@ a:hover {
   align-items: center;
 }
 
-.storeForms input {
-  margin-bottom: 25px;
-}
 .storeForms img {
   position: absolute;
   bottom: 0px;
