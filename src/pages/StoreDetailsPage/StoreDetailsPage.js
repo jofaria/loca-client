@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import storeService from "../../services/store.services";
 
 function StoreDetailsPage(props) {
@@ -37,14 +36,14 @@ function StoreDetailsPage(props) {
             <img className="store-logo" alt="logo" src={store.logo} />
             <h1>{store.storeName.toUpperCase()}</h1>
             {store.website && (
-              <Link to={store.website}>
-                <button> Website</button>
-              </Link>
+              <a href={store.website} target="_blank" rel="noreferrer">
+                <button> Website </button>
+              </a>
             )}
             {store.instagram && (
-              <Link to={store.instagram}>
+              <a href={store.instagram} target="_blank" rel="noreferrer">
                 <button> Instagram </button>
-              </Link>
+              </a>
             )}
 
             <p>
