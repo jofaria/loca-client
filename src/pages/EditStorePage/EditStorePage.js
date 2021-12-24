@@ -1,5 +1,4 @@
-// import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
@@ -10,7 +9,7 @@ function EditStorePage(props) {
   const { owner } = useContext(AuthContext);
 
   const { storeId } = useParams();
-  // const [thisStore, setThisStore] = useState(null);
+  const [thisStore, setThisStore] = useState(null);
 
   const navigate = useNavigate();
   const [storeName, setStoreName] = useState("");
@@ -21,23 +20,23 @@ function EditStorePage(props) {
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await storeService.getOne(storeId);
-  //       const retrievedStore = response.data;
-  //       setThisStore(retrievedStore);
-  //       setStoreName(retrievedStore.storeName);
-  //       setLogoURL(retrievedStore.logo);
-  //       setCoverImgURL(retrievedStore.coverImg);
-  //       setDescription(retrievedStore.description);
-  //       setAddress(retrievedStore.address);
-  //       setWebsite(retrievedStore.website);
-  //       setInstagram(retrievedStore.instagram);
-  //     } catch (error) {}
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await storeService.getOne(storeId);
+        const retrievedStore = response.data;
+        setThisStore(retrievedStore);
+        setStoreName(retrievedStore.storeName);
+        setLogoURL(retrievedStore.logo);
+        setCoverImgURL(retrievedStore.coverImg);
+        setDescription(retrievedStore.description);
+        setAddress(retrievedStore.address);
+        setWebsite(retrievedStore.website);
+        setInstagram(retrievedStore.instagram);
+      } catch (error) {}
+    };
+    fetchData();
+  }, []);
 
   // ? HANDLE FUNCTIONS
 
@@ -114,56 +113,56 @@ function EditStorePage(props) {
       <h1>Edit Store</h1>
 
       <form onSubmit={handleStoreSubmit}>
-        {/* {thisStore && ( */}
-        <>
-          <label>Store Name:</label>
-          <input
-            type="text"
-            // defaultValue={thisStore.storeName}
-            onChange={handleStoreName}
-          />
+        {thisStore && (
+          <>
+            <label>Store Name:</label>
+            <input
+              type="text"
+              defaultValue={thisStore.storeName}
+              onChange={handleStoreName}
+            />
 
-          <label>Logo:</label>
-          <input
-            className="input-file"
-            type="file"
-            onChange={handleImageUpload}
-          />
+            <label>Logo:</label>
+            <input
+              className="input-file"
+              type="file"
+              onChange={handleImageUpload}
+            />
 
-          <label>Description:</label>
-          <input
-            type="text"
-            // defaultValue={thisStore.description}
-            onChange={handleDescription}
-          />
+            <label>Description:</label>
+            <input
+              type="text"
+              defaultValue={thisStore.description}
+              onChange={handleDescription}
+            />
 
-          <label>Address:</label>
-          <input
-            type="text"
-            name="address"
-            // defaultValue={thisStore.address}
-            onChange={handleAddress}
-          />
+            <label>Address:</label>
+            <input
+              type="text"
+              name="address"
+              defaultValue={thisStore.address}
+              onChange={handleAddress}
+            />
 
-          <label>Website:</label>
-          <input
-            type="text"
-            name="website"
-            // defaultValue={thisStore.website}
-            onChange={handleWebsite}
-          />
-          <label>Instagram:</label>
-          <input
-            type="text"
-            name="instagram"
-            // defaultValue={thisStore.instagram}
-            onChange={handleInstagram}
-          />
-          <button className="my-btn-white" type="submit">
-            EDIT STORE
-          </button>
-        </>
-        {/* )} */}
+            <label>Website:</label>
+            <input
+              type="text"
+              name="website"
+              defaultValue={thisStore.website}
+              onChange={handleWebsite}
+            />
+            <label>Instagram:</label>
+            <input
+              type="text"
+              name="instagram"
+              defaultValue={thisStore.instagram}
+              onChange={handleInstagram}
+            />
+            <button className="my-btn-white" type="submit">
+              EDIT STORE
+            </button>
+          </>
+        )}
       </form>
       <img
         src={"/images/person-sweater-cropped-no-bg.png"}
