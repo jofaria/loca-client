@@ -23,14 +23,15 @@ function SignupPage(props) {
       e.preventDefault();
       // Create an object representing the request body
       const requestBody = { email, password, username, phone };
-
+      console.log(phone);
+      console.log(typeof phone);
       await authService.signup(requestBody);
 
       // If the request is successful navigate to login page
       navigate("/login");
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
-      setErrorMessage("Please enter valid fields.");
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -65,12 +66,7 @@ function SignupPage(props) {
           />
 
           <label>Phone:</label>
-          <input
-            type="number"
-            name="phone"
-            value={phone}
-            onChange={handlePhone}
-          />
+          <input type="tel" name="phone" value={phone} onChange={handlePhone} />
 
           <button className="my-btn-white" type="submit">
             Sign Up
