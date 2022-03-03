@@ -4,9 +4,7 @@ import storeService from "../../services/store.services";
 
 function StoreDetailsPage(props) {
   const [store, setStore] = useState(null);
-  // const [loading, setLoading] = useState(true);
   const { storeId } = useParams();
-  // const { owner } = useContext(AuthContext);
 
   useState(() => {
     const fetchData = async () => {
@@ -28,11 +26,6 @@ function StoreDetailsPage(props) {
       {store && (
         <div className="storeDetailsContainer">
           <div className="store-header">
-            {/* <img
-              src={store.coverImg}
-              alt="coverImg"
-              className="store-coverImg"
-            /> */}
             <img className="store-logo" alt="logo" src={store.logo} />
             <h1>{store.storeName.toUpperCase()}</h1>
             {store.website && (
