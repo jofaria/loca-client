@@ -1,8 +1,6 @@
-// import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-// import { Link } from "react-router-dom";
 import imageService from "../../services/image.service";
 import storeService from "../../services/store.services";
 
@@ -19,15 +17,6 @@ function RegisterStorePage(props) {
   const [instagram, setInstagram] = useState("");
 
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  // ? Category options
-  // const [categories, setCategories] = useState([]);
-  // const [organicMaterials, setOrganicMaterials] = useState(false);
-  // const [recycledMaterials, setRecycledMaterials] = useState(false);
-  // const [madeLocally, setMadeLocally] = useState(false);
-  // const [crueltyFree, setCrueltyFree] = useState(false);
-  // const [ethicallyMade, setEthicallyMade] = useState(false);
-  // const [vintageSecondHand, setVintageSecondHand] = useState(false);
 
   // ? HANDLE FUNCTIONS
 
@@ -52,48 +41,6 @@ function RegisterStorePage(props) {
   if (logoURL === "") {
     setLogoURL("/images/logo-removebg-preview.png");
   }
-
-  // const handleCoverImgUpload = async (e) => {
-  //   try {
-  //     const uploadData = new FormData();
-
-  //     uploadData.append("coverImg", e.target.files[0]);
-
-  //     const response = await imageService.uploadImage(uploadData);
-  //     setCoverImgURL("this imaaaage");
-  //   } catch (error) {}
-  // };
-
-  // ? OTHER handleLogo function
-
-  // const handleCategories = (e) => {
-  //   if (typeof e.target.value === "string") {
-  //     setCategories([e.target.value]);
-  //   } else {
-  //     setCategories(e.target.value);
-  //   }
-  //   return;
-  // };
-
-  // const handleOrganicMaterials = (e) => setOrganicMaterials(e.target.checked);
-  // const handleRecycledMaterials = (e) => setRecycledMaterials(e.target.checked);
-  // const handleMadeLocally = (e) => setMadeLocally(e.target.checked);
-  // const handleCrueltyFree = (e) => setCrueltyFree(e.target.checked);
-  // const handleEthicallyMade = (e) => setEthicallyMade(e.target.checked);
-  // const handleVintageSecondHand = (e) => setVintageSecondHand(e.target.checked);s
-
-  // const handleCategory = (e) => setCategory(e.target.value);
-
-  // const data = [
-  //   { option: "Recycled materials", id: 1 },
-  //   { option: "Organic materials", id: 2 },
-  //   { option: "Made locally", id: 3 },
-  //   { option: "Made ethically", id: 4 },
-  //   { option: "Cruelty-free", id: 5 },
-  //   { option: "Second-hand", id: 6 },
-  // ];
-
-  // const [options] = useState(data);
 
   // ? HANDLE SUBMIT
 
@@ -150,19 +97,8 @@ function RegisterStorePage(props) {
           onChange={handleImageUpload}
         />
 
-        {/* <label>Cover Image:</label>
-        <input type="file" onChange={handleCoverImgUpload} /> */}
-
         <label>Description:</label>
         <input type="text" value={description} onChange={handleDescription} />
-
-        {/* <label>Location:</label>
-        <input
-          type="text"
-          name="location"
-          value={location}
-          onChange={handleLocation}
-        /> */}
 
         <label>Address:</label>
         <input
@@ -171,20 +107,7 @@ function RegisterStorePage(props) {
           value={address}
           onChange={handleAddress}
         />
-        {/* <label>Latitude:</label>
-        <input
-          type="number"
-          name="latitude"
-          value={latitude}
-          onChange={handleLatitude}
-        />
-        <label>Longitude:</label>
-        <input
-          type="number"
-          name="longitude"
-          value={longitude}
-          onChange={handleLongitude}
-        /> */}
+
         <label>Website:</label>
         <input
           type="text"
@@ -214,122 +137,3 @@ function RegisterStorePage(props) {
 }
 
 export default RegisterStorePage;
-
-// <div>
-//   <p>Choose a category:</p>
-
-//   <label for="organicMaterials">Choose categories</label>
-//   <select multiple value={categories} onChange={handleCategories}>
-//     <option></option>
-//   </select>
-
-//   <label for="organicMaterials">Organic materials</label>
-//   <input
-//     type="checkbox"
-//     name="organicMaterials"
-//     checked={organicMaterials}
-//     onChange={handleCategories}
-//   />
-//   <label for="recycledMaterials">Recycled materials</label>
-//   <input
-//     type="checkbox"
-//     name="recycledMaterials"
-//     checked={recycledMaterials}
-//     onChange={handleCategories}
-//   />
-//   <label for="madeLocally">Made locally</label>
-//   <input
-//     type="checkbox"
-//     name="madeLocally"
-//     checked={madeLocally}
-//     onChange={handleCategories}
-//   />
-//   <label for="ethicallyMade">Made ethically</label>
-//   <input
-//     type="checkbox"
-//     name="ethicallyMade"
-//     checked={ethicallyMade}
-//     onChange={handleCategories}
-//   />
-//   <label for="crueltyFree">Cruelty-free</label>
-//   <input
-//     type="checkbox"
-//     name="crueltyFree"
-//     checked={crueltyFree}
-//     onChange={handleCrueltyFree}
-//   />
-//   <label for="vintageSecondHand">Vintage / Second-hand</label>
-//   <input
-//     type="checkbox"
-//     name="vintageSecondHand"
-//     checked={vintageSecondHand}
-//     onChange={handleVintageSecondHand}
-//   />
-// </div>;
-
-// const categories = {
-//   organicMaterials,
-//   recycledMaterials,
-//   madeLocally,
-//   crueltyFree,
-//   ethicallyMade,
-//   vintageSecondHand,
-// };
-
-// const dataToSend = {
-//   categories,
-// };
-
-// {
-//   /* <div>
-//           <p>Choose a category:</p>
-
-//           <label for="organicMaterials">Choose categories</label>
-//           <select multiple value={categories} onChange={handleCategories}>
-//             <option></option>
-//           </select>
-
-//           <label for="organicMaterials">Organic materials</label>
-//           <input
-//             type="checkbox"
-//             name="organicMaterials"
-//             checked={organicMaterials}
-//             onChange={handleCategories}
-//           />
-//           <label for="recycledMaterials">Recycled materials</label>
-//           <input
-//             type="checkbox"
-//             name="recycledMaterials"
-//             checked={recycledMaterials}
-//             onChange={handleCategories}
-//           />
-//           <label for="madeLocally">Made locally</label>
-//           <input
-//             type="checkbox"
-//             name="madeLocally"
-//             checked={madeLocally}
-//             onChange={handleCategories}
-//           />
-//           <label for="ethicallyMade">Made ethically</label>
-//           <input
-//             type="checkbox"
-//             name="ethicallyMade"
-//             checked={ethicallyMade}
-//             onChange={handleCategories}
-//           />
-//           <label for="crueltyFree">Cruelty-free</label>
-//           <input
-//             type="checkbox"
-//             name="crueltyFree"
-//             checked={crueltyFree}
-//             onChange={handleCrueltyFree}
-//           />
-//           <label for="vintageSecondHand">Vintage / Second-hand</label>
-//           <input
-//             type="checkbox"
-//             name="vintageSecondHand"
-//             checked={vintageSecondHand}
-//             onChange={handleVintageSecondHand}
-//           />
-//         </div> */
-// }
