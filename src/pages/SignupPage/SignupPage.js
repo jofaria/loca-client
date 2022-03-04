@@ -1,13 +1,18 @@
 // import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import { AuthContext } from "../../context/auth.context";
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_SERVER_URL;
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
+  const { logInUser } = useContext(AuthContext);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -23,12 +28,16 @@ function SignupPage(props) {
       e.preventDefault();
       // Create an object representing the request body
       const requestBody = { email, password, username, phone };
-      console.log(phone);
-      console.log(typeof phone);
       await authService.signup(requestBody);
 
-      // If the request is successful navigate to login page
-      navigate("/login");
+      const loginInfo = { email, password };
+
+      const response = await authService.login(loginInfo);
+
+      const token = response.data.authToken;
+      logInUser(token);
+
+      navigate("/");
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
       setErrorMessage(error.response.data.message);
