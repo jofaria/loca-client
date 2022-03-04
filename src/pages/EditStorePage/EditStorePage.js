@@ -70,7 +70,6 @@ function EditStorePage(props) {
       alert("Please fill in all the fields");
     }
 
-    console.log("address before sending", address);
     const updateStore = {
       storeName,
       storeOwner: owner._id,
@@ -84,7 +83,6 @@ function EditStorePage(props) {
 
     try {
       await storeService.updateOne(storeId, updateStore);
-      console.log("address after sending", address);
       setStoreName("");
       setLogoURL("");
       setAddress("");

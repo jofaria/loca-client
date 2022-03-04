@@ -29,7 +29,6 @@ function RegisterStorePage(props) {
   const handleImageUpload = async (e) => {
     try {
       const uploadData = new FormData();
-      console.log(uploadData);
 
       uploadData.append("logo", e.target.files[0]);
 

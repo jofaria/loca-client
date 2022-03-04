@@ -24,7 +24,6 @@ function StoreComponent() {
     const chars = event.target.value;
     setChar(chars);
     if (chars !== "") {
-      console.log(chars);
       const storesFiltered = stores.filter((eachStore) => {
         return eachStore.address.toLowerCase().includes(chars.toLowerCase());
       });

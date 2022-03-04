@@ -34,7 +34,6 @@ function MapComponent() {
 
         const storesData = response.data;
         setStores(storesData);
-        console.log(storesData);
       };
 
       fetchData();
